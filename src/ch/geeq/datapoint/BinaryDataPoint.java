@@ -24,4 +24,9 @@ public class BinaryDataPoint extends DataPoint{
 
 
     }
+    
+    public String toString()
+    {
+        return "BinaryDataPoint. Is output : "+super.isOutput()+". Value : "+value;
+    }
 }

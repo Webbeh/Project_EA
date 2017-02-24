@@ -18,4 +18,9 @@ public class FloatDataPoint extends DataPoint {
     public void setValue(float value) {
         this.value = value;
     }
+    
+    public String toString()
+    {
+        return "FloatDataPoint. Is output : "+super.isOutput()+". Value : "+value;
+    }
 }

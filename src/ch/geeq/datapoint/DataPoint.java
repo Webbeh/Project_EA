@@ -18,7 +18,7 @@ public class DataPoint {
 
     private boolean isOutput;
 
-    public DataPoint(String label, boolean isOutput){
+    DataPoint(String label, boolean isOutput){
         this.label = label;
         this.isOutput = isOutput;
 
@@ -30,7 +30,11 @@ public class DataPoint {
     public String getLabel() {
         return label;
     }
-
-
-
+public String toString() {
+        return "DataPoint. No value possible.";
+    }
+    
+    boolean isOutput() {
+        return isOutput;
+    }
 }
