@@ -7,11 +7,18 @@ package ch.geeq.datapoint;
  */
 public class BinaryDataPoint extends DataPoint{
 
-    boolean value;
+    private boolean value;
 
     public BinaryDataPoint(String label, boolean isOutput) {
         super(label, isOutput);
     }
 
 
+    public boolean isValue() {
+        return value;
+    }
+
+    public void setValue(boolean value) {
+        this.value = value;
+    }
 }
