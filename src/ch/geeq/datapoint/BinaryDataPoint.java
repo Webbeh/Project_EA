@@ -21,8 +21,7 @@ public class BinaryDataPoint extends DataPoint{
     public void setValue(boolean value) {
         this.value = value;
 
-
-
+        push();
     }
     
     public String toString()

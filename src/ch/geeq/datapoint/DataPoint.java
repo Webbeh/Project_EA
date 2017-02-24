@@ -7,7 +7,7 @@ import ch.geeq.datapoint.connectors.WebConnector;
 /**
  * Created by sylvain.ieri on 24.02.2017.
  */
-public class DataPoint {
+public abstract class DataPoint {
 
     private DataBaseConnector dbc;
     private WebConnector wc;
@@ -22,18 +22,31 @@ public class DataPoint {
         this.label = label;
         this.isOutput = isOutput;
 
-        DataBaseConnector.getInstance();
-        WebConnector.getInstance();
-        FieldConnector.getInstance();
+        dbc = DataBaseConnector.getInstance();
+        wc = WebConnector.getInstance();
+        fc = FieldConnector.getInstance();
     }
 
     public String getLabel() {
         return label;
     }
-public String toString() {
-        return "DataPoint. No value possible.";
+
+    protected void push()
+    {
+        if(isOutput)
+        {
+            dbc.onNewValue(this);
+            fc.onNewValue(this);
+        }
+        else
+        {
+            dbc.onNewValue(this);
+            wc.onNewValue(this);
+        }
     }
-    
+
+
+
     boolean isOutput() {
         return isOutput;
     }
