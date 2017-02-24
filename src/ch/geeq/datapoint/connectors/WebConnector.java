@@ -19,7 +19,7 @@ public class WebConnector {
     
     }
     
-    public WebConnector getInstance(){
+    public static WebConnector getInstance(){
 
         if(instance == null)
         {

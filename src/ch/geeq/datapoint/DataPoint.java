@@ -22,9 +22,9 @@ public class DataPoint {
         this.label = label;
         this.isOutput = isOutput;
 
-        dbc.getInstance();
-        wc.getInstance();
-        fc.getInstance();
+        DataBaseConnector.getInstance();
+        WebConnector.getInstance();
+        FieldConnector.getInstance();
     }
 
     public String getLabel() {

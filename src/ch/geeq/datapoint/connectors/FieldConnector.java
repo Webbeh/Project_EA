@@ -18,7 +18,7 @@ public class FieldConnector {
     
     }
     
-    public FieldConnector getInstance(){
+    public static FieldConnector getInstance(){
 
         if(instance == null)
         {
