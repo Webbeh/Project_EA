@@ -1,6 +1,7 @@
 package ch.geeq;
 
-import ch.geeq.datapoint.DataPoint;
+import ch.geeq.datapoint.BinaryDataPoint;
+import ch.geeq.datapoint.FloatDataPoint;
 
 /**
  * @author weby@we-bb.com [Nicolas Glassey]
@@ -9,10 +10,22 @@ import ch.geeq.datapoint.DataPoint;
  */
 public class Project {
     public static void main(String[] args) {
-        DataPoint boolIn = new DataPoint("boolIn", false);
-        DataPoint boolOut = new DataPoint("boolOut", true);
+        BinaryDataPoint boolIn = new BinaryDataPoint("boolIn", false);
+        BinaryDataPoint boolOut = new BinaryDataPoint("boolOut", true);
         
-        DataPoint floatIn = new DataPoint("floatIn", false);
-        DataPoint floatOut = new DataPoint("floatOut", true);
+        FloatDataPoint floatIn = new FloatDataPoint("floatIn", false);
+        FloatDataPoint floatOut = new FloatDataPoint("floatOut", true);
+        
+        boolIn.setValue(true);
+        boolOut.setValue(false);
+        
+        floatIn.setValue(17.4f);
+        floatOut.setValue(13.2f);
+    
+        System.out.println("Values : \n" +
+                "BoolIn : "+boolIn+"\n" +
+                "BoolOut : "+boolOut+"\n" +
+                "FloatIn : "+floatIn+"\n" +
+                "FloatOut : "+floatOut);
     }
 }
