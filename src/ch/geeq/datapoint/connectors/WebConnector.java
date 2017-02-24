@@ -9,17 +9,24 @@ import ch.geeq.datapoint.DataPoint;
  */
 public class WebConnector {
     private DataPoint dp;
-    
+
+    private static WebConnector instance;
+
     private WebConnector()
     {
     
     }
     
-    public WebConnector getInstance()
-    {
-        return this;
+    public WebConnector getInstance(){
+
+        if(instance == null)
+        {
+            instance = new WebConnector();
+        }
+        return instance;
     }
-    
+
+
     public void onNewValue(DataPoint dp)
     {
         this.dp = dp;

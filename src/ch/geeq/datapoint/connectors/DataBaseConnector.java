@@ -9,15 +9,24 @@ import ch.geeq.datapoint.DataPoint;
  */
 public class DataBaseConnector {
     private DataPoint dp;
-    
+
+    private static DataBaseConnector instance;
+
     private DataBaseConnector()
     {
     
     }
-    public DataBaseConnector getInstance()
+
+    public static DataBaseConnector getInstance()
     {
-        return this;
+
+        if(instance == null)
+        {
+            instance = new DataBaseConnector();
+        }
+        return instance;
     }
+
     public void onNewValue(DataPoint dp)
     {
         this.dp = dp;

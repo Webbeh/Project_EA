@@ -9,15 +9,21 @@ import ch.geeq.datapoint.DataPoint;
  */
 public class FieldConnector {
     private DataPoint dp;
-    
+
+    private static FieldConnector instance;
+
     private FieldConnector()
     {
     
     }
     
-    public FieldConnector getInstance()
-    {
-        return this;
+    public FieldConnector getInstance(){
+
+        if(instance == null)
+        {
+            instance = new FieldConnector();
+        }
+        return instance;
     }
     
     public void onNewValue(DataPoint dp)
