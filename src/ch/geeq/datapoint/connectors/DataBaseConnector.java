@@ -1,4 +1,6 @@
-package ch.geeq.datapoint;
+package ch.geeq.datapoint.connectors;
+
+import ch.geeq.datapoint.DataPoint;
 
 /**
  * @author weby@we-bb.com [Nicolas Glassey]

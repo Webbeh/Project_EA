@@ -1,5 +1,9 @@
 package ch.geeq.datapoint;
 
+import ch.geeq.datapoint.connectors.DataBaseConnector;
+import ch.geeq.datapoint.connectors.FieldConnector;
+import ch.geeq.datapoint.connectors.WebConnector;
+
 /**
  * Created by sylvain.ieri on 24.02.2017.
  */
