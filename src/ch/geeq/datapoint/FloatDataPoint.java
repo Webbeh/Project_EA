@@ -11,7 +11,7 @@ public class FloatDataPoint extends DataPoint {
     }
 
 
-    public float isValue() {
+    public float getValue() {
         return value;
     }
 

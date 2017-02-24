@@ -1,6 +1,8 @@
 package ch.geeq.datapoint.connectors;
 
+import ch.geeq.datapoint.BinaryDataPoint;
 import ch.geeq.datapoint.DataPoint;
+import ch.geeq.datapoint.FloatDataPoint;
 
 /**
  * @author weby@we-bb.com [Nicolas Glassey]
@@ -8,7 +10,7 @@ import ch.geeq.datapoint.DataPoint;
  * @since 2/24/17
  */
 public class WebConnector {
-    private DataPoint dp;
+
 
     private static WebConnector instance;
 
@@ -29,16 +31,23 @@ public class WebConnector {
 
     public void onNewValue(DataPoint dp)
     {
-        this.dp = dp;
+        if (dp instanceof BinaryDataPoint)
+        {
+            pushToWebPages(dp.getLabel(), ((BinaryDataPoint) dp).getValue());
+        }
+        else if (dp instanceof FloatDataPoint)
+        {
+            pushToWebPages(dp.getLabel(), ((FloatDataPoint) dp).getValue());
+        }
     }
     
     public void pushToWebPages(String label, boolean value)
     {
-    
+        System.out.println("Web:" +label + ":" + value);
     }
     
     public void pushToWebPages(String label, float value)
     {
-    
+        System.out.println("Web:" +label + ":" + value);
     }
 }

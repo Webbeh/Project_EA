@@ -14,7 +14,7 @@ public class BinaryDataPoint extends DataPoint{
     }
 
 
-    public boolean isValue() {
+    public boolean getValue() {
         return value;
     }
 
