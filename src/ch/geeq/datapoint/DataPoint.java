@@ -22,14 +22,15 @@ public class DataPoint {
         this.label = label;
         this.isOutput = isOutput;
 
-        //TODO: get the instaces of connectors
+        dbc.getInstance();
+        wc.getInstance();
+        fc.getInstance();
     }
 
     public String getLabel() {
         return label;
     }
-    
-    public String toString() {
+public String toString() {
         return "DataPoint. No value possible.";
     }
     
