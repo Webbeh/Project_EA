@@ -1,3 +1,3 @@
 # Project_EA
 
-Oui.
+Project "Minecraft Electrical Age" for Hes-SO 4th semester in Infotronics.
