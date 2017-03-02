@@ -5,13 +5,14 @@ import ch.geeq.datapoint.connectors.FieldConnector;
 import ch.geeq.datapoint.connectors.WebConnector;
 
 /**
- * Created by sylvain.ieri on 24.02.2017.
+ *   Created by sylvain.ieri, on 24.02.2017.
  */
 public abstract class DataPoint {
 
     private DataBaseConnector dbc;
     private WebConnector wc;
     private FieldConnector fc;
+
 
 
     private  String label;
@@ -36,12 +37,14 @@ public abstract class DataPoint {
         if(isOutput)
         {
             dbc.onNewValue(this);
+            wc.onNewValue(this);
             fc.onNewValue(this);
         }
         else
         {
             dbc.onNewValue(this);
             wc.onNewValue(this);
+
         }
     }
 
