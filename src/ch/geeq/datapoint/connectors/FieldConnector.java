@@ -42,6 +42,10 @@ public class FieldConnector {
         if (dp instanceof BinaryDataPoint)
         {
             pushToField(dp.getLabel(), ((BinaryDataPoint) dp).getValue());
+            Coil coil = coilsHashMap.get(dp);
+
+            coil.write();
+
         }
         else if (dp instanceof FloatDataPoint)
         {
@@ -51,7 +55,9 @@ public class FieldConnector {
     
     public void pushToField(String label, boolean value)
     {
-        System.out.println("Field:" +label + ":" + value);
+        System.out.println("Field:" + label + ":" + value);
+
+
     }
     
     public void pushToField(String label, float value)

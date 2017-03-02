@@ -30,8 +30,9 @@ public class ModbusConnector {
         return new Random().nextFloat();
     }
     
-    public void writeBinary(int address, boolean value)
+    public void writeBinary(int rtuAddress, int portAddress, boolean value)
     {
-    
+        System.out.println("Coil with rtu #"+rtuAddress+" and address #"+portAddress+". Value to write : "+value);
+
     }
 }
