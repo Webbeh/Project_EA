@@ -4,6 +4,9 @@ import ch.geeq.datapoint.BinaryDataPoint;
 import ch.geeq.datapoint.DataPoint;
 import ch.geeq.datapoint.FloatDataPoint;
 
+import java.util.HashMap;
+import java.util.LinkedList;
+
 /**
  * @author weby@we-bb.com [Nicolas Glassey]
  * @version 1.0.0
@@ -13,6 +16,9 @@ public class FieldConnector {
 
     private static FieldConnector instance;
 
+    final List<InputRegister> inputRegistersList = new LinkedList<>();
+    final HashMap<DataPoint, Coil> coilsHashMap = new HashMap<>();
+    
     private FieldConnector()
     {
     
@@ -50,4 +56,17 @@ public class FieldConnector {
         System.out.println("Field:" +label + ":" + value);
     }
     
+    public void poll() {
+    
+    }
+    
+    public void addInputRegister(int rtuAddress, int regAddress)
+    {
+    
+    }
+    
+    public void addCoil(int rtuAddress, int regAddress)
+    {
+    
+    }
 }
