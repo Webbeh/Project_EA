@@ -56,7 +56,7 @@ public abstract class DataPoint {
         }
     }
     
-    private DataPoint getDataPointFromLabel(String label) {
+    public static DataPoint getDataPointFromLabel(String label) {
         return dataPointMap.get(label);
     }
     

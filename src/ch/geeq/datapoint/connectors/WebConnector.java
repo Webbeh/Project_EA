@@ -41,9 +41,13 @@ public class WebConnector {
         }
     }
 
-    public void onMessage(String label, String value)
-    {
+    //get a message from the web and update the relevant datapoint. The type of value is unclear in the documentation so
+    //choose a boolean for ease of use. Might need to be modified depending on the specification of the webpage
 
+    public void onMessage(String label, boolean value)
+    {
+        BinaryDataPoint dp = (BinaryDataPoint) DataPoint.getDataPointFromLabel(label);
+        dp.setValue(value);
     }
 
     public void pushToWebPages(String label, boolean value)
