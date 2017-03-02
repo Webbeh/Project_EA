@@ -22,10 +22,6 @@ public class Project {
         floatIn.setValue(17.4f);
         floatOut.setValue(13.2f);
     
-        System.out.println("Values : \n" +
-                "BoolIn : "+boolIn+"\n" +
-                "BoolOut : "+boolOut+"\n" +
-                "FloatIn : "+floatIn+"\n" +
-                "FloatOut : "+floatOut);
+
     }
 }
