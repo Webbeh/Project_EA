@@ -11,6 +11,7 @@ import ch.geeq.datapoint.DataPoint;
 public class Coil {
     private int coilAddress, rtuAddress;
     private BinaryDataPoint itsBinaryDataPoint;
+    private String label;
     
     public Coil(String label, int rtuAddress, int coilAddress) {
         this.rtuAddress=rtuAddress;
@@ -20,7 +21,7 @@ public class Coil {
     }
     
     public void write() {
-    
+        System.out.println("Coil \""+label+"\" with rtu #"+rtuAddress+" and address #"+coilAddress+". Value to write : "+itsBinaryDataPoint.getValue());
     }
     
     public DataPoint getBinaryDatapoint() {
