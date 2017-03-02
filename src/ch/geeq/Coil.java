@@ -12,9 +12,11 @@ public class Coil {
     private int coilAddress, rtuAddress;
     private BinaryDataPoint itsBinaryDataPoint;
     
-    public Coil(int rtuAddress, int coilAddress) {
+    public Coil(int rtuAddress, int coilAddress, String label) {
         this.rtuAddress=rtuAddress;
         this.coilAddress=coilAddress;
+        
+        itsBinaryDataPoint = new BinaryDataPoint(label, true);
     }
     
     public void write() {
