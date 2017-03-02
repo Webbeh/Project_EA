@@ -40,7 +40,12 @@ public class WebConnector {
             pushToWebPages(dp.getLabel(), ((FloatDataPoint) dp).getValue());
         }
     }
-    
+
+    public void onMessage(String label, String value)
+    {
+
+    }
+
     public void pushToWebPages(String label, boolean value)
     {
         System.out.println("Web:" +label + ":" + value);
