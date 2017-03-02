@@ -11,7 +11,7 @@ import java.util.HashMap;
  */
 public abstract class DataPoint {
 
-    private final HashMap<String, DataPoint> dataPointMap = new HashMap<>();
+    private final static HashMap<String, DataPoint> dataPointMap = new HashMap<>();
     
     
     private DataBaseConnector dbc;
@@ -31,6 +31,9 @@ public abstract class DataPoint {
         dbc = DataBaseConnector.getInstance();
         wc = WebConnector.getInstance();
         fc = FieldConnector.getInstance();
+
+        dataPointMap.put(label, this);
+
     }
 
     public String getLabel() {
