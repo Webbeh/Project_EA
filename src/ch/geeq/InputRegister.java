@@ -11,14 +11,14 @@ public class InputRegister {
     private int inputRegisterAddress, rtuAddress;
     private FloatDataPoint itsFloatDataPoint;
     
-    public InputRegister(String label,int rtuAddress, int regAddress) {
+    public InputRegister(String label, int rtuAddress, int regAddress) {
         this.rtuAddress=rtuAddress;
         this.inputRegisterAddress=regAddress;
 
         itsFloatDataPoint = new FloatDataPoint(label, false);
     }
-    
+
     public void read() {
-    
+
     }
 }

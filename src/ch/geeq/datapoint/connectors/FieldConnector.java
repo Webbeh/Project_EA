@@ -63,15 +63,15 @@ public class FieldConnector {
     
     }
     
-    public void addInputRegister(int rtuAddress, int regAddress)
+    public void addInputRegister(String label ,int rtuAddress, int regAddress)
     {
-        InputRegister ir = new InputRegister(rtuAddress, regAddress);
+        InputRegister ir = new InputRegister(label, rtuAddress, regAddress);
         inputRegistersList.add(ir);
     }
     
-    public void addCoil(int rtuAddress, int regAddress)
+    public void addCoil(String label ,int rtuAddress, int regAddress)
     {
-        Coil c = new Coil(rtuAddress, regAddress);
+        Coil c = new Coil(label, rtuAddress, regAddress);
         coilsHashMap.put(c.getBinaryDatapoint(), c);
     }
 }
