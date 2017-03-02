@@ -65,11 +65,13 @@ public class FieldConnector {
     
     public void addInputRegister(int rtuAddress, int regAddress)
     {
-    
+        InputRegister ir = new InputRegister(rtuAddress, regAddress);
+        inputRegistersList.add(ir);
     }
     
     public void addCoil(int rtuAddress, int regAddress)
     {
-    
+        Coil c = new Coil(rtuAddress, regAddress);
+        coilsHashMap.put(c.getBinaryDatapoint(), c);
     }
 }

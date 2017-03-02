@@ -1,6 +1,7 @@
 package ch.geeq;
 
 import ch.geeq.datapoint.BinaryDataPoint;
+import ch.geeq.datapoint.DataPoint;
 
 /**
  * @author weby@we-bb.com [Nicolas Glassey]
@@ -11,7 +12,16 @@ public class Coil {
     private int coilAddress, rtuAddress;
     private BinaryDataPoint itsBinaryDataPoint;
     
+    public Coil(int rtuAddress, int coilAddress) {
+        this.rtuAddress=rtuAddress;
+        this.coilAddress=coilAddress;
+    }
+    
     public void write() {
     
+    }
+    
+    public DataPoint getBinaryDatapoint() {
+        return itsBinaryDataPoint;
     }
 }
