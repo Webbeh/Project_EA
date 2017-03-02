@@ -1,5 +1,7 @@
 package ch.geeq.datapoint.connectors;
 
+import java.util.Random;
+
 /**
  * @author weby@we-bb.com [Nicolas Glassey]
  * @version 1.0.0
@@ -23,9 +25,9 @@ public class ModbusConnector {
         return instance;
     }
     
-    public float readFloat(int address)
+    public float readFloat(int rtuAddress, int portAddress)
     {
-        return 0f;
+        return new Random().nextFloat();
     }
     
     public void writeBinary(int address, boolean value)
