@@ -60,7 +60,10 @@ public class FieldConnector {
     }
     
     public void poll() {
-    
+        for(InputRegister inputRegister : inputRegistersList)
+        {
+            inputRegister.read();
+        }
     }
     
     public void addInputRegister(String label ,int rtuAddress, int regAddress)

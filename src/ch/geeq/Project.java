@@ -10,6 +10,12 @@ import ch.geeq.datapoint.connectors.FieldConnector;
 public class Project {
     public static void main(String[] args) {
         FieldConnector connector = FieldConnector.getInstance();
+        connector.addCoil("Coil 1", 1, 3);
+        connector.addCoil("Coil 2", 3, 7);
         
+        connector.addInputRegister("Input 1", 1, 4);
+        connector.addInputRegister("Input 2", 5, 1);
+        
+        connector.poll();
     }
 }
