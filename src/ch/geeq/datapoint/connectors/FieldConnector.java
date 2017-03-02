@@ -1,11 +1,14 @@
 package ch.geeq.datapoint.connectors;
 
+import ch.geeq.Coil;
+import ch.geeq.InputRegister;
 import ch.geeq.datapoint.BinaryDataPoint;
 import ch.geeq.datapoint.DataPoint;
 import ch.geeq.datapoint.FloatDataPoint;
 
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * @author weby@we-bb.com [Nicolas Glassey]
