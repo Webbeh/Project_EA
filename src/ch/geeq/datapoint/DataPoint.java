@@ -4,11 +4,16 @@ import ch.geeq.datapoint.connectors.DataBaseConnector;
 import ch.geeq.datapoint.connectors.FieldConnector;
 import ch.geeq.datapoint.connectors.WebConnector;
 
+import java.util.HashMap;
+
 /**
  * Created by sylvain.ieri on 24.02.2017.
  */
 public abstract class DataPoint {
 
+    private final HashMap<String, DataPoint> dataPointMap = new HashMap<>();
+    
+    
     private DataBaseConnector dbc;
     private WebConnector wc;
     private FieldConnector fc;
@@ -44,9 +49,11 @@ public abstract class DataPoint {
             wc.onNewValue(this);
         }
     }
-
-
-
+    
+    private DataPoint getDataPointFromLabel(String label) {
+        return dataPointMap.get(label);
+    }
+    
     boolean isOutput() {
         return isOutput;
     }
