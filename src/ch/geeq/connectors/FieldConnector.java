@@ -1,7 +1,7 @@
 package ch.geeq.connectors;
 
-import ch.geeq.Coil;
-import ch.geeq.InputRegister;
+import ch.geeq.io.Coil;
+import ch.geeq.io.InputRegister;
 import ch.geeq.datapoint.BinaryDataPoint;
 import ch.geeq.datapoint.DataPoint;
 import ch.geeq.datapoint.FloatDataPoint;

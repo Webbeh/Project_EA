@@ -1,4 +1,4 @@
-package ch.geeq;
+package ch.geeq.io;
 
 import ch.geeq.datapoint.BinaryDataPoint;
 import ch.geeq.datapoint.DataPoint;
