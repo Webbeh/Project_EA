@@ -2,7 +2,7 @@ package ch.geeq.io;
 
 import ch.geeq.datapoint.BinaryDataPoint;
 import ch.geeq.datapoint.DataPoint;
-import ch.geeq.connectors.ModbusConnector;
+import ch.geeq.modbus.ModbusConnector;
 
 /**
  * @author weby@we-bb.com [Nicolas Glassey]
