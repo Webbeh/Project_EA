@@ -1,6 +1,7 @@
-package ch.geeq.modbus;
+package ch.geeq.connectors;
 
 
+import ch.geeq.modbus.Utility;
 import com.serotonin.modbus4j.ModbusFactory;
 import com.serotonin.modbus4j.ModbusMaster;
 import com.serotonin.modbus4j.code.DataType;
@@ -8,6 +9,7 @@ import com.serotonin.modbus4j.exception.ErrorResponseException;
 import com.serotonin.modbus4j.exception.ModbusInitException;
 import com.serotonin.modbus4j.exception.ModbusTransportException;
 import com.serotonin.modbus4j.ip.IpParameters;
+import com.serotonin.modbus4j.locator.BaseLocator;
 
 /**
  * Created by rut on 30/01/17.
@@ -58,7 +60,9 @@ public class ModbusConnector {
     public Float readFloat(int rtuAddress, int registerAddress) {
         if (_isInitialized) {
             try {
-                return (Float) _modbus.getValue( 1, 4, address, DataType.FOUR_BYTE_FLOAT);
+                //4 : function code
+                return (Float) _modbus.getValue(BaseLocator.inputRegister(rtuAddress, registerAddress, DataType.FOUR_BYTE_FLOAT));
+//                return (Float) _modbus.getValue( 1, 4, address, DataType.FOUR_BYTE_FLOAT);
             } catch (ModbusTransportException e) {
                 DEBUG_INFO("readFloat()", " ModbusTransportException: " + e.getLocalizedMessage());
             } catch (ErrorResponseException e) {
@@ -71,7 +75,10 @@ public class ModbusConnector {
     public boolean readBinary(int rtuAddress, int registerAddress, int address) {
         if (_isInitialized) {
             try {
-                return (boolean) _modbus.getValue(1, 1, address, DataType.BINARY);
+                if((int) _modbus.getValue(BaseLocator.inputRegister(rtuAddress, registerAddress, DataType.BINARY))>0)
+                  return true;
+                return false;
+//                return (boolean) _modbus.getValue(1, 1, address, DataType.BINARY);
             } catch (ModbusTransportException e) {
                 DEBUG_INFO("writeBinary()", " ModbusTransportException: " + e.getLocalizedMessage());
             } catch (ErrorResponseException e) {
@@ -84,7 +91,8 @@ public class ModbusConnector {
     public boolean writeBinary(int rtuAddress, int registerAddress, boolean value) {
         if (_isInitialized) {
             try {
-                _modbus.setValue(1, 1, address, DataType.BINARY, value);
+                _modbus.setValue(BaseLocator.inputRegister(rtuAddress, registerAddress, DataType.BINARY), value);
+//                _modbus.setValue(1, 1, address, DataType.BINARY, value);
                 return true;
             } catch (ModbusTransportException e) {
                 DEBUG_INFO("writeBinary()", " ModbusTransportException: " + e.getLocalizedMessage());

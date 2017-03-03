@@ -3,8 +3,8 @@ package ch.geeq.connectors;
 import ch.geeq.datapoint.BinaryDataPoint;
 import ch.geeq.datapoint.DataPoint;
 import ch.geeq.datapoint.FloatDataPoint;
-import ch.geeq.io.Coil;
-import ch.geeq.io.InputRegister;
+import ch.geeq.modbus.Coil;
+import ch.geeq.modbus.InputRegister;
 
 import java.util.HashMap;
 import java.util.LinkedList;
