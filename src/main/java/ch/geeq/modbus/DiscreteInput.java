@@ -24,7 +24,6 @@ public class DiscreteInput {
     public void read() {
         ModbusConnector mc = ModbusConnector.getInstance();
         boolean f = mc.readBinary(rtuAddress, inputRegisterAddress);
-        System.out.println("Read from Discrete Input \""+label+"\" with rtu #"+rtuAddress+" and reg #"+inputRegisterAddress+". Returned value : "+f);
         itsBinaryDataPoint.setValue(f);
     }
     

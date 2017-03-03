@@ -25,7 +25,6 @@ public class InputRegister {
     public void read() {
         ModbusConnector mc = ModbusConnector.getInstance();
         float f = mc.readFloat(rtuAddress, inputRegisterAddress);
-        System.out.println("Read from Input Register \""+label+"\" with rtu #"+rtuAddress+" and reg #"+inputRegisterAddress+". Return value : "+f);
         itsFloatDataPoint.setValue(f);
     }
     

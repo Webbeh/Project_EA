@@ -3,12 +3,14 @@ package ch.geeq.connectors;
 import ch.geeq.datapoint.BinaryDataPoint;
 import ch.geeq.datapoint.DataPoint;
 import ch.geeq.datapoint.FloatDataPoint;
+import ch.geeq.modbus.Utility;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Base64;
 
 /**
  * @author weby@we-bb.com [Nicolas Glassey]
@@ -19,10 +21,10 @@ public class DataBaseConnector
 {
 
     //Settings
-    private final static String URL = "vlesdi.hevs.ch:8086/write?db=";
-    private final static String db_name = "";
-    private final static String username = "";
-    private final static String password = "";
+    private final static String URL = "http://vlesdi.hevs.ch:8086/write?db=";
+    private final static String db_name = "SIn16";
+    private final static String username = "SIn16";
+    private final static String password = Utility.md5sum(username);
 
 
     private static DataBaseConnector instance;
@@ -37,14 +39,16 @@ public class DataBaseConnector
         try
         {
             //Url scheme : http://username:password@url:port/write?db=dbname
-            url = new URL("http://"+username+":"+password+"@"+URL + db_name);
+            url = new URL(URL + db_name);
             connection =(HttpURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Content-Type", "binary/octect-stream");
+            String userpass = username+":"+password;
+            String basicAuth = "Basic " + new String(Base64.getEncoder().encode(userpass.getBytes()));
+            connection.setRequestProperty("Authorization", basicAuth);
             connection.setDoOutput(true);
 
             //Instanciate IO buffers
-            inputStream = new InputStreamReader(connection.getInputStream());
             outputStream = new OutputStreamWriter(connection.getOutputStream());
 
         } catch (Exception e)
@@ -87,18 +91,13 @@ public class DataBaseConnector
      */
     private void pushToDB(String label, boolean value)
     {
-        System.out.println("DB:" + label + ":" + value);
-
         try
         {
-            outputStream.write(label + ": value=" + value);
-            char[] buffer = new char[6];
-            inputStream.read(buffer,0,6);
-
-            if(buffer.equals("200 OK"))
-            {
-                System.out.println("Answered correctly");
-            }
+            outputStream.write(label + " value=" + value);
+            outputStream.flush();
+    
+            if(connection.getResponseCode()==200 || connection.getResponseCode()==204)
+                System.out.println("Yes !");
         } catch (IOException e)
         {
             e.printStackTrace();
@@ -106,6 +105,7 @@ public class DataBaseConnector
 
     }
     
+    int i = 0;
     /**
      * Push float data to the database
      * @param label Label
@@ -113,6 +113,15 @@ public class DataBaseConnector
      */
     private void pushToDB(String label, float value)
     {
-        System.out.println("DB:" +label + ":" + value);
+        try {
+            String t = label + " value=" + value;
+            outputStream.write(t);
+            outputStream.flush();
+            System.out.print(t);
+            if (connection.getResponseCode() == 204 || connection.getResponseCode() == 200)
+                System.out.println(" ; Data n° "+i+++" logged !");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

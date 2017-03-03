@@ -59,11 +59,11 @@ public class WebConnector {
 
     public void pushToWebPages(String label, boolean value)
     {
-        System.out.println("Web:" +label + ":" + value);
+//        System.out.println("Web:" +label + ":" + value);
     }
     
     public void pushToWebPages(String label, float value)
     {
-        System.out.println("Web:" +label + ":" + value);
+//        System.out.println("Web:" +label + ":" + value);
     }
 }
