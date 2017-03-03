@@ -3,6 +3,7 @@ package ch.geeq.connectors;
 import ch.geeq.datapoint.BinaryDataPoint;
 import ch.geeq.datapoint.DataPoint;
 import ch.geeq.datapoint.FloatDataPoint;
+import ch.geeq.modbus.Utility;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -22,7 +23,7 @@ public class DataBaseConnector
     private final static String URL = "vlesdi.hevs.ch:8086/write?db=";
     private final static String db_name = "";
     private final static String username = "";
-    private final static String password = "";
+    private final static String password = Utility.md5sum(username);
 
 
     private static DataBaseConnector instance;
