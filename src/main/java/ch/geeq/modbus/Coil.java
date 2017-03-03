@@ -24,7 +24,7 @@ public class Coil {
         ModbusConnector.getInstance().writeBinary(rtuAddress,coilAddress,itsBinaryDataPoint.getValue());
     }
     
-    public BinaryDataPoint getBinaryDatapoint() {
+    public BinaryDataPoint getDatapoint() {
         return itsBinaryDataPoint;
     }
 }

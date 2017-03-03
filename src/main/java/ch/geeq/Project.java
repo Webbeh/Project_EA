@@ -14,12 +14,13 @@ public class Project {
         FieldConnector connector = FieldConnector.getInstance();
         
         connector.addInputRegister("SOLAR_STRING0_I_FLOAT", 1, 1);
+        connector.addDiscreteInput("COAL_SW", 1, 209);
         connector.addCoil("COAL_SW", 1, 209);
         
         connector.poll();
         System.out.println("\n\n");
     
         Timer t = new Timer();
-        t.scheduleAtFixedRate(new FieldConnector.PollTask(), 0, 2000);
+        t.scheduleAtFixedRate(new FieldConnector.PollTask(), 0, 3000);
     }
 }

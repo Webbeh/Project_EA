@@ -1,7 +1,6 @@
 package ch.geeq.datapoint;
 
 
-
 /**
  * Created by sylvain.ieri on 24.02.2017.
  */
@@ -17,7 +16,7 @@ public class BinaryDataPoint extends DataPoint{
     public boolean getValue() {
         return value;
     }
-
+    
     public void setValue(boolean value) {
         this.value = value;
 

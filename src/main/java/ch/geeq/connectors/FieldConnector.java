@@ -4,11 +4,10 @@ import ch.geeq.datapoint.BinaryDataPoint;
 import ch.geeq.datapoint.DataPoint;
 import ch.geeq.datapoint.FloatDataPoint;
 import ch.geeq.modbus.Coil;
+import ch.geeq.modbus.DiscreteInput;
 import ch.geeq.modbus.InputRegister;
 
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.TimerTask;
 
 /**
@@ -19,8 +18,9 @@ import java.util.TimerTask;
 public class FieldConnector {
 
     private static FieldConnector instance;
-    final List<InputRegister> inputRegistersList = new LinkedList<>();
+    final HashMap<DataPoint, InputRegister> inputRegisterHashMap = new HashMap<>();
     final HashMap<DataPoint, Coil> coilsHashMap = new HashMap<>();
+    final HashMap<DataPoint, DiscreteInput> discreteInputHashMap = new HashMap<>();
     
     private FieldConnector()
     {
@@ -66,31 +66,42 @@ public class FieldConnector {
     }
     
     public void poll() {
-        for(InputRegister inputRegister : inputRegistersList)
+        for(InputRegister inputRegister : inputRegisterHashMap.values())
         {
             inputRegister.read();
         }
         
         for(Coil coil : coilsHashMap.values())
         {
-            coil.getBinaryDatapoint().setValue(!coil.getBinaryDatapoint().getValue());
+            coil.getDatapoint().setValue(!coil.getDatapoint().getValue());
             coil.write();
+        }
+        
+        for(DiscreteInput di : discreteInputHashMap.values())
+        {
+            di.read();
         }
     }
     
     public void addInputRegister(String label ,int rtuAddress, int regAddress)
     {
         InputRegister ir = new InputRegister(label, rtuAddress, regAddress);
-        inputRegistersList.add(ir);
+        inputRegisterHashMap.put(ir.getDataPoint(), ir);
     }
     
     public void addCoil(String label ,int rtuAddress, int regAddress)
     {
         Coil c = new Coil(label, rtuAddress, regAddress);
-        coilsHashMap.put(c.getBinaryDatapoint(), c);
+        coilsHashMap.put(c.getDatapoint(), c);
     }
     
     static int num = 1;
+    
+    public void addDiscreteInput(String label, int rtuAddress, int regAddress) {
+        DiscreteInput d = new DiscreteInput(label, rtuAddress, regAddress);
+        discreteInputHashMap.put(d.getDataPoint(), d);
+    }
+    
     public static class PollTask extends TimerTask {
         @Override
         public void run() {

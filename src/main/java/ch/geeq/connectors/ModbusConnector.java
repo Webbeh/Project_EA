@@ -72,11 +72,10 @@ public class ModbusConnector {
         return null;
     }
 
-    public boolean readBinary(int rtuAddress, int registerAddress, int address) {
+    public boolean readBinary(int rtuAddress, int registerAddress) {
         if (_isInitialized) {
             try {
                 return _modbus.getValue(BaseLocator.coilStatus(rtuAddress, registerAddress));
-//                return (boolean) _modbus.getValue(1, 1, address, DataType.BINARY);
             } catch (ModbusTransportException e) {
                 DEBUG_INFO("writeBinary()", " ModbusTransportException: " + e.getLocalizedMessage());
             } catch (ErrorResponseException e) {
