@@ -1,6 +1,7 @@
 package ch.geeq;
 
 import ch.geeq.datapoint.connectors.FieldConnector;
+import ch.geeq.datapoint.connectors.WebConnector;
 
 /**
  * @author weby@we-bb.com [Nicolas Glassey]
@@ -17,5 +18,8 @@ public class Project {
         connector.addInputRegister("Input 2", 5, 1);
         
         connector.poll();
+        System.out.println("\n\n");
+    
+        WebConnector.getInstance().onMessage("Coil 2", false);
     }
 }
