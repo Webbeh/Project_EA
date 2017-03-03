@@ -1,8 +1,8 @@
 package ch.geeq.datapoint;
 
-import ch.geeq.datapoint.connectors.DataBaseConnector;
-import ch.geeq.datapoint.connectors.FieldConnector;
-import ch.geeq.datapoint.connectors.WebConnector;
+import ch.geeq.connectors.DataBaseConnector;
+import ch.geeq.connectors.FieldConnector;
+import ch.geeq.connectors.WebConnector;
 
 import java.util.HashMap;
 

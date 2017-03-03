@@ -1,7 +1,9 @@
 package ch.geeq;
 
-import ch.geeq.datapoint.connectors.FieldConnector;
-import ch.geeq.datapoint.connectors.WebConnector;
+import ch.geeq.connectors.FieldConnector;
+import ch.geeq.connectors.WebConnector;
+
+import java.util.Timer;
 
 /**
  * @author weby@we-bb.com [Nicolas Glassey]
@@ -21,5 +23,7 @@ public class Project {
         System.out.println("\n\n");
     
         WebConnector.getInstance().onMessage("Coil 2", false);
+        Timer t = new Timer();
+        t.scheduleAtFixedRate(new FieldConnector.PollTask(), 0, 2000);
     }
 }

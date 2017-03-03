@@ -1,14 +1,15 @@
 package ch.geeq.connectors;
 
-import ch.geeq.io.Coil;
-import ch.geeq.io.InputRegister;
 import ch.geeq.datapoint.BinaryDataPoint;
 import ch.geeq.datapoint.DataPoint;
 import ch.geeq.datapoint.FloatDataPoint;
+import ch.geeq.io.Coil;
+import ch.geeq.io.InputRegister;
 
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.TimerTask;
 
 /**
  * @author weby@we-bb.com [Nicolas Glassey]
@@ -82,5 +83,12 @@ public class FieldConnector {
     {
         Coil c = new Coil(label, rtuAddress, regAddress);
         coilsHashMap.put(c.getBinaryDatapoint(), c);
+    }
+    
+    public static class PollTask extends TimerTask {
+        @Override
+        public void run() {
+            getInstance().poll();
+        }
     }
 }
