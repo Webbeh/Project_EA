@@ -60,7 +60,6 @@ public abstract class DataPoint {
         {
             dbc.onNewValue(this);
             wc.onNewValue(this);
-
         }
     }
     
