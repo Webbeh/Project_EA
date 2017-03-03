@@ -6,7 +6,6 @@ import ch.geeq.datapoint.FloatDataPoint;
 import ch.geeq.modbus.Utility;
 
 import java.io.DataOutputStream;
-import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Base64;
@@ -67,16 +66,7 @@ public class DataBaseConnector {
      */
     private void pushToDB(String label, boolean value)
     {
-        try {
-            outputStream.writeBytes(label + " value=" + value);
-            outputStream.flush();
-            outputStream.close();
-            if (connection.getResponseCode() == 200 || connection.getResponseCode() == 204)
-                System.out.println("Yes !");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    
+        s+=label+" value="+value+"\n";
     }
     
     int i = 0;
