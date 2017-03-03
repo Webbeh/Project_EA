@@ -10,7 +10,6 @@ public class FloatDataPoint extends DataPoint {
         super(label, isOutput);
     }
 
-
     public float getValue() {
         return value;
     }

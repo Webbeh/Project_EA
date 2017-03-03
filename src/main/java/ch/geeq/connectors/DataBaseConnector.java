@@ -10,7 +10,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Base64;
 
 /**
  * @author weby@we-bb.com [Nicolas Glassey]
@@ -49,6 +48,7 @@ public class DataBaseConnector
             connection.setDoOutput(true);
 
             //Instanciate IO buffers
+            inputStream = new InputStreamReader(connection.getInputStream());
             outputStream = new OutputStreamWriter(connection.getOutputStream());
 
         } catch (Exception e)
