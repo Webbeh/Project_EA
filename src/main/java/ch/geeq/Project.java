@@ -25,6 +25,5 @@ public class Project {
         WebConnector.getInstance().onMessage("Coil 2", false);
         Timer t = new Timer();
         t.scheduleAtFixedRate(new FieldConnector.PollTask(), 0, 2000);
-        //test
     }
 }
