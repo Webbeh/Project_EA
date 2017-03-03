@@ -34,7 +34,13 @@ public class ModbusConnector {
         }
         return _pInstance;
     }
-
+    
+    /**
+     * Connect to the modbus TCP gateway
+     * @param host Hostname
+     * @param port TCP Port
+     * @return True if connection succeeded
+     */
     public boolean connect(String host, int port) {
         // Construct modbus TCP parameters.
         IpParameters parameters = new IpParameters();
@@ -56,7 +62,13 @@ public class ModbusConnector {
         // If we arrive here, all is fine.
         return _isInitialized;
     }
-
+    
+    /**
+     * Reads a float
+     * @param rtuAddress RTU Address
+     * @param registerAddress Register address
+     * @return The value returned by Modbus
+     */
     public Float readFloat(int rtuAddress, int registerAddress) {
         if (_isInitialized) {
             try {
@@ -71,7 +83,7 @@ public class ModbusConnector {
         }
         return null;
     }
-
+    
     public boolean readBinary(int rtuAddress, int registerAddress) {
         if (_isInitialized) {
             try {

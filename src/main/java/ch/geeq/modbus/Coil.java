@@ -13,6 +13,12 @@ public class Coil {
     private BinaryDataPoint itsBinaryDataPoint;
     private String label;
     
+    /**
+     * Creates a new coil
+     * @param label The label
+     * @param rtuAddress RTU Address
+     * @param coilAddress Register Address
+     */
     public Coil(String label, int rtuAddress, int coilAddress) {
         this.rtuAddress=rtuAddress;
         this.coilAddress=coilAddress;
@@ -20,6 +26,9 @@ public class Coil {
         itsBinaryDataPoint = new BinaryDataPoint(label, true);
     }
     
+    /**
+     * Write data to the coil
+     */
     public void write() {
         ModbusConnector.getInstance().writeBinary(rtuAddress,coilAddress,itsBinaryDataPoint.getValue());
     }

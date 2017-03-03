@@ -4,9 +4,10 @@ import ch.geeq.datapoint.BinaryDataPoint;
 import ch.geeq.datapoint.DataPoint;
 import ch.geeq.datapoint.FloatDataPoint;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
@@ -17,6 +18,7 @@ import java.net.URL;
 public class DataBaseConnector
 {
 
+    //Settings
     private final static String URL = "vlesdi.hevs.ch:8086/write?db=";
     private final static String db_name = "";
     private final static String username = "";
@@ -34,12 +36,14 @@ public class DataBaseConnector
         URL url;
         try
         {
+            //Url scheme : http://username:password@url:port/write?db=dbname
             url = new URL("http://"+username+":"+password+"@"+URL + db_name);
             connection =(HttpURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Content-Type", "binary/octect-stream");
             connection.setDoOutput(true);
 
+            //Instanciate IO buffers
             inputStream = new InputStreamReader(connection.getInputStream());
             outputStream = new OutputStreamWriter(connection.getOutputStream());
 
@@ -59,7 +63,11 @@ public class DataBaseConnector
         }
         return instance;
     }
-
+    
+    /**
+     * Checks if the datapoint is binary or float
+     * @param dp The datapoint
+     */
     public void onNewValue(DataPoint dp)
     {
         if (dp instanceof BinaryDataPoint)
@@ -71,7 +79,12 @@ public class DataBaseConnector
             pushToDB(dp.getLabel(), ((FloatDataPoint) dp).getValue());
         }
     }
-
+    
+    /**
+     * Push binary data to the database
+     * @param label Label
+     * @param value Binary value
+     */
     private void pushToDB(String label, boolean value)
     {
         System.out.println("DB:" + label + ":" + value);
@@ -92,7 +105,12 @@ public class DataBaseConnector
         }
 
     }
-
+    
+    /**
+     * Push float data to the database
+     * @param label Label
+     * @param value Float value
+     */
     private void pushToDB(String label, float value)
     {
         System.out.println("DB:" +label + ":" + value);

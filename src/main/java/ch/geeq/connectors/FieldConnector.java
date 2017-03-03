@@ -36,6 +36,10 @@ public class FieldConnector {
         return instance;
     }
     
+    /**
+     * Push new values to the coil
+     * @param dp
+     */
     public void onNewValue(DataPoint dp)
     {
 
@@ -53,6 +57,11 @@ public class FieldConnector {
         }
     }
     
+    /**
+     * Stub
+     * @param label Label
+     * @param value Value
+     */
     public void pushToField(String label, boolean value)
     {
         System.out.println("Field:" + label + ":" + value);
@@ -60,6 +69,11 @@ public class FieldConnector {
 
     }
     
+    /**
+     * Stub
+     * @param label Label
+     * @param value Value
+     */
     public void pushToField(String label, float value)
     {
         System.out.println("Field:" +label + ":" + value);
@@ -83,12 +97,24 @@ public class FieldConnector {
         }
     }
     
+    /**
+     * Registers a new input register to the fieldconnector.
+     * @param label Label
+     * @param rtuAddress RTU Address
+     * @param regAddress Register Address
+     */
     public void addInputRegister(String label ,int rtuAddress, int regAddress)
     {
         InputRegister ir = new InputRegister(label, rtuAddress, regAddress);
         inputRegisterHashMap.put(ir.getDataPoint(), ir);
     }
     
+    /**
+     * Registers a new coil to the fieldconnector.
+     * @param label Label
+     * @param rtuAddress RTU Address
+     * @param regAddress Register Address
+     */
     public void addCoil(String label ,int rtuAddress, int regAddress)
     {
         Coil c = new Coil(label, rtuAddress, regAddress);
@@ -97,11 +123,20 @@ public class FieldConnector {
     
     static int num = 1;
     
+    /**
+     * Registers a new discrete input to the fieldconnector.
+     * @param label Label
+     * @param rtuAddress RTU Address
+     * @param regAddress Register Address
+     */
     public void addDiscreteInput(String label, int rtuAddress, int regAddress) {
         DiscreteInput d = new DiscreteInput(label, rtuAddress, regAddress);
         discreteInputHashMap.put(d.getDataPoint(), d);
     }
     
+    /**
+     * Static Poll Task
+     */
     public static class PollTask extends TimerTask {
         @Override
         public void run() {

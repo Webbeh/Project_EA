@@ -27,8 +27,12 @@ public class WebConnector {
         }
         return instance;
     }
-
-
+    
+    
+    /**
+     * Push new value to the web connector
+     * @param dp The datapoint
+     */
     public void onNewValue(DataPoint dp)
     {
         if (dp instanceof BinaryDataPoint)
@@ -40,10 +44,13 @@ public class WebConnector {
             pushToWebPages(dp.getLabel(), ((FloatDataPoint) dp).getValue());
         }
     }
-
-    //get a message from the web and update the relevant datapoint. The type of value is unclear in the documentation so
-    //choose a boolean for ease of use. Might need to be modified depending on the specification of the webpage
-
+    
+    /**
+     * get a message from the web and update the relevant datapoint. The type of value is unclear in the documentation so
+     * choose a boolean for ease of use. Might need to be modified depending on the specification of the webpage
+     * @param label Label
+     * @param value Value to push
+     */
     public void onMessage(String label, boolean value)
     {
         BinaryDataPoint dp = (BinaryDataPoint) DataPoint.getDataPointFromLabel(label);

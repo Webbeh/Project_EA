@@ -23,7 +23,12 @@ public abstract class DataPoint {
     private  String label;
 
     private boolean isOutput;
-
+    
+    /**
+     * Creates a datapoint
+     * @param label Label of the datapoint
+     * @param isOutput True if is an output port
+     */
     DataPoint(String label, boolean isOutput){
         this.label = label;
         this.isOutput = isOutput;
@@ -39,8 +44,11 @@ public abstract class DataPoint {
     public String getLabel() {
         return label;
     }
-
-    protected void push()
+    
+    /**
+     * Push values to all datapoints
+     */
+    void push()
     {
         if(isOutput)
         {
@@ -56,6 +64,11 @@ public abstract class DataPoint {
         }
     }
     
+    /**
+     * Returns the datapoint associated with a label.
+     * @param label Label
+     * @return The correct datapoint
+     */
     public static DataPoint getDataPointFromLabel(String label) {
         return dataPointMap.get(label);
     }
