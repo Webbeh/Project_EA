@@ -1,8 +1,7 @@
 package ch.geeq.modbus;
 
-import ch.geeq.datapoint.BinaryDataPoint;
-import ch.geeq.datapoint.DataPoint;
 import ch.geeq.connectors.ModbusConnector;
+import ch.geeq.datapoint.BinaryDataPoint;
 
 /**
  * @author weby@we-bb.com [Nicolas Glassey]
@@ -25,7 +24,7 @@ public class Coil {
         ModbusConnector.getInstance().writeBinary(rtuAddress,coilAddress,itsBinaryDataPoint.getValue());
     }
     
-    public DataPoint getBinaryDatapoint() {
+    public BinaryDataPoint getBinaryDatapoint() {
         return itsBinaryDataPoint;
     }
 }

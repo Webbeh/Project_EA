@@ -19,13 +19,12 @@ import java.util.TimerTask;
 public class FieldConnector {
 
     private static FieldConnector instance;
-
     final List<InputRegister> inputRegistersList = new LinkedList<>();
     final HashMap<DataPoint, Coil> coilsHashMap = new HashMap<>();
     
     private FieldConnector()
     {
-    
+        ModbusConnector.getInstance().connect("localhost", 1502);
     }
     
     public static FieldConnector getInstance(){
@@ -71,6 +70,12 @@ public class FieldConnector {
         {
             inputRegister.read();
         }
+        
+        for(Coil coil : coilsHashMap.values())
+        {
+            coil.getBinaryDatapoint().setValue(!coil.getBinaryDatapoint().getValue());
+            coil.write();
+        }
     }
     
     public void addInputRegister(String label ,int rtuAddress, int regAddress)
@@ -85,9 +90,11 @@ public class FieldConnector {
         coilsHashMap.put(c.getBinaryDatapoint(), c);
     }
     
+    static int num = 1;
     public static class PollTask extends TimerTask {
         @Override
         public void run() {
+            System.out.println("N° : "+num+++"\n");
             getInstance().poll();
         }
     }

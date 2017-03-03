@@ -1,7 +1,6 @@
 package ch.geeq;
 
 import ch.geeq.connectors.FieldConnector;
-import ch.geeq.connectors.WebConnector;
 
 import java.util.Timer;
 
@@ -13,16 +12,13 @@ import java.util.Timer;
 public class Project {
     public static void main(String[] args) {
         FieldConnector connector = FieldConnector.getInstance();
-        connector.addCoil("Coil 1", 1, 3);
-        connector.addCoil("Coil 2", 3, 7);
         
-        connector.addInputRegister("Input 1", 1, 4);
-        connector.addInputRegister("Input 2", 5, 1);
+        connector.addInputRegister("SOLAR_STRING0_I_FLOAT", 1, 1);
+        connector.addCoil("COAL_SW", 1, 209);
         
         connector.poll();
         System.out.println("\n\n");
     
-        WebConnector.getInstance().onMessage("Coil 2", false);
         Timer t = new Timer();
         t.scheduleAtFixedRate(new FieldConnector.PollTask(), 0, 2000);
     }
