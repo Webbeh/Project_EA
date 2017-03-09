@@ -9,6 +9,8 @@ import java.io.DataOutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Base64;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * @author weby@we-bb.com [Nicolas Glassey]
@@ -32,7 +34,10 @@ public class DataBaseConnector {
     
     private DataBaseConnector()
     {
-    
+
+        //Schedule a push of the datas
+        Timer t = new Timer();
+        t.scheduleAtFixedRate(new PushTask(), 0, 3000);
     }
     
     public static DataBaseConnector getInstance()
@@ -59,27 +64,27 @@ public class DataBaseConnector {
     }
     
     /**
-     * Push binary data to the database
+     * create the http request for the database  and store it to be pushed later
      *
      * @param label Label
      * @param value Binary value
      */
     private void pushToDB(String label, boolean value)
     {
-        s+=label+" value="+value+"\n";
+        s+=label+" value="+value  + " " + new java.util.Date().getTime() +"\n";
     }
     
     int i = 0;
     
     /**
-     * Push float data to the database
+     * create the http request for the database  and store it to be pushed later
      *
      * @param label Label
      * @param value Float value
      */
     private void pushToDB(String label, float value)
     {
-        s += label + " value=" + value + "\n";
+        s += label + " value=" + value + " " + new java.util.Date().getTime() + "\n";
     }
     
     String s = "";
@@ -103,13 +108,23 @@ public class DataBaseConnector {
             outputStream.flush();
             outputStream.close();
             int rp = connection.getResponseCode();
+            System.out.println(s);
             if(rp==200||rp==204)
-                System.out.println(s);
+               System.out.println(rp);
     
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             s="";
+        }
+    }
+
+    public static class PushTask extends TimerTask
+    {
+        @Override
+        public void run() {
+
+            getInstance().push();
         }
     }
     

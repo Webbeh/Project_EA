@@ -8,6 +8,7 @@ import ch.geeq.modbus.DiscreteInput;
 import ch.geeq.modbus.InputRegister;
 
 import java.util.HashMap;
+import java.util.Timer;
 import java.util.TimerTask;
 
 /**
@@ -25,6 +26,10 @@ public class FieldConnector {
     private FieldConnector()
     {
         ModbusConnector.getInstance().connect("localhost", 1502);
+
+        //Schedule a polling of inputs
+        Timer t = new Timer();
+        t.scheduleAtFixedRate(new FieldConnector.PollTask(), 0, 3000);
     }
     
     public static FieldConnector getInstance(){
@@ -95,7 +100,7 @@ public class FieldConnector {
         {
             di.read();
         }
-        DataBaseConnector.getInstance().push();
+
     }
     
     /**
