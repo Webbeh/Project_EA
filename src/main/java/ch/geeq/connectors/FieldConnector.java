@@ -69,8 +69,7 @@ public class FieldConnector {
      */
     public void pushToField(String label, boolean value)
     {
-        System.out.println("Field:" + label + ":" + value);
-
+      //  System.out.println("Field:" + label + ":" + value);
 
     }
     
@@ -81,7 +80,7 @@ public class FieldConnector {
      */
     public void pushToField(String label, float value)
     {
-        System.out.println("Field:" +label + ":" + value);
+        //System.out.println("Field:" +label + ":" + value);
     }
     
     public void poll() {
@@ -94,8 +93,8 @@ public class FieldConnector {
                 for (InputRegister inputRegister : inputRegisterHashMap.values()) {
                     inputRegister.read();
                 }
-    
                 for (Coil coil : coilsHashMap.values()) {
+                    coil.getDatapoint().setValue(true);
                     coil.write();
                 }
                 for (DiscreteInput di : discreteInputHashMap.values()) {
@@ -151,7 +150,6 @@ public class FieldConnector {
     public static class PollTask extends TimerTask {
         @Override
         public void run() {
-            System.out.println("N° : "+num+++"\n");
             getInstance().poll();
         }
     }
