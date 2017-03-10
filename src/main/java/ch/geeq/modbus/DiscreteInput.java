@@ -23,14 +23,8 @@ public class DiscreteInput {
 
     public void read() {
         ModbusConnector mc = ModbusConnector.getInstance();
-        try {
-            boolean f = mc.readBinary(rtuAddress, inputRegisterAddress);
+            Boolean f = mc.readBinary(rtuAddress, inputRegisterAddress);
             itsBinaryDataPoint.setValue(f);
-        } catch (NullPointerException e)
-        {
-            mc.error();
-            System.out.println("The connection ended unexpectedly.");
-        }
     }
     
     public BinaryDataPoint getDataPoint() {

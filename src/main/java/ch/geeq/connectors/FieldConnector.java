@@ -85,22 +85,29 @@ public class FieldConnector {
     }
     
     public void poll() {
-        for(InputRegister inputRegister : inputRegisterHashMap.values())
-        {
-            inputRegister.read();
+        //Check modbus connexion
+        if (!ModbusConnector.getInstance().checkConnect()) {
+            System.out.println("No modbus connection.");
+            ModbusConnector.getInstance().reconnect();
+        } else {
+            try {
+                for (InputRegister inputRegister : inputRegisterHashMap.values()) {
+                    inputRegister.read();
+                }
+    
+                for (Coil coil : coilsHashMap.values()) {
+                    coil.getDatapoint().setValue(!coil.getDatapoint().getValue());
+                    coil.write();
+                }
+    
+                for (DiscreteInput di : discreteInputHashMap.values()) {
+                    di.read();
+                }
+            } catch(NullPointerException e)
+            {
+                System.out.println("Connection ended unexpectedly.");
+            }
         }
-        
-        for(Coil coil : coilsHashMap.values())
-        {
-            coil.getDatapoint().setValue(!coil.getDatapoint().getValue());
-            coil.write();
-        }
-        
-        for(DiscreteInput di : discreteInputHashMap.values())
-        {
-            di.read();
-        }
-
     }
     
     /**

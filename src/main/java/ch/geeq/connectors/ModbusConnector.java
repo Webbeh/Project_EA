@@ -22,6 +22,9 @@ public class ModbusConnector {
     // Modbus library
     private ModbusMaster _modbus;
     private boolean _isInitialized;
+    
+    private String host;
+    private int port;
 
     private ModbusConnector() {
         _modbus =  null;
@@ -34,7 +37,10 @@ public class ModbusConnector {
         }
         return _pInstance;
     }
-    
+    public boolean reconnect()
+    {
+        return host != null && !host.equals("") && connect(host, port);
+    }
     /**
      * Connect to the modbus TCP gateway
      * @param host Hostname
@@ -44,6 +50,8 @@ public class ModbusConnector {
     public boolean connect(String host, int port) {
         // Construct modbus TCP parameters.
         IpParameters parameters = new IpParameters();
+        this.host =host;
+        this.port=port;
         parameters.setHost(host);
         parameters.setPort(port);
 
@@ -54,11 +62,12 @@ public class ModbusConnector {
         try {
             _modbus.init();
             _isInitialized = true;
+            _modbus.setConnected(true);
         } catch (ModbusInitException e) {
             DEBUG_INFO("connect()", " ModbusInitException: " + e.getLocalizedMessage());
             _isInitialized = false;
         }
-
+        
         // If we arrive here, all is fine.
         return _isInitialized;
     }
@@ -69,44 +78,50 @@ public class ModbusConnector {
      * @param registerAddress Register address
      * @return The value returned by Modbus
      */
-    public Float readFloat(int rtuAddress, int registerAddress) {
-        if (_isInitialized) {
+    public Float readFloat(int rtuAddress, int registerAddress) throws NullPointerException {
+        if (_isInitialized && _modbus.isConnected()) {
             try {
                 //4 : function code
                 return (Float) _modbus.getValue(BaseLocator.inputRegister(rtuAddress, registerAddress, DataType.FOUR_BYTE_FLOAT));
 //                return (Float) _modbus.getValue( 1, 4, address, DataType.FOUR_BYTE_FLOAT);
             } catch (ModbusTransportException e) {
                 DEBUG_INFO("readFloat()", " ModbusTransportException: " + e.getLocalizedMessage());
+                _modbus.setConnected(false);
             } catch (ErrorResponseException e) {
                 DEBUG_INFO("readFloat()", " ErrorResponseException: " + e.getLocalizedMessage());
+                _modbus.setConnected(false);
             }
         }
-        return null;
+        throw new NullPointerException("Cannot read float.");
     }
     
-    public Boolean readBinary(int rtuAddress, int registerAddress) {
-        if (_isInitialized) {
+    public Boolean readBinary(int rtuAddress, int registerAddress) throws NullPointerException {
+        if (_isInitialized && _modbus.isConnected()) {
             try {
                 return _modbus.getValue(BaseLocator.coilStatus(rtuAddress, registerAddress));
             } catch (ModbusTransportException e) {
                 DEBUG_INFO("writeBinary()", " ModbusTransportException: " + e.getLocalizedMessage());
+                _modbus.setConnected(false);
             } catch (ErrorResponseException e) {
                 DEBUG_INFO("writeBinary()", " ErrorResponseException: " + e.getLocalizedMessage());
+                _modbus.setConnected(false);
             }
         }
-        return null;
+        throw new NullPointerException("Cannot read binary.");
     }
 
     public boolean writeBinary(int rtuAddress, int registerAddress, boolean value) {
-        if (_isInitialized) {
+        if (_isInitialized && _modbus.isConnected()) {
             try {
                 _modbus.setValue(BaseLocator.coilStatus(rtuAddress, registerAddress), value);
 //                _modbus.setValue(1, 1, address, DataType.BINARY, value);
                 return true;
             } catch (ModbusTransportException e) {
                 DEBUG_INFO("writeBinary()", " ModbusTransportException: " + e.getLocalizedMessage());
+                _modbus.setConnected(false);
             } catch (ErrorResponseException e) {
                 DEBUG_INFO("writeBinary()", " ErrorResponseException: " + e.getLocalizedMessage());
+                _modbus.setConnected(false);
             }
         }
         return false;
@@ -118,7 +133,10 @@ public class ModbusConnector {
     private void DEBUG_INFO(String method, String msg) {
         Utility.DEBUG( "[modbus::ModbusConnector]", method, msg);
     }
-    
+   
+    public boolean checkConnect() {
+        return _modbus.isConnected();
+    }
     public void error() {
         _isInitialized=false;
     }
