@@ -91,6 +91,12 @@ public class DataBaseConnector {
     
     public void push()
     {
+
+        if(s.isEmpty())
+        {
+            return;
+        }
+
         URL url;
         try {
             //Url scheme : http://username:password@url:port/write?db=dbname
@@ -108,9 +114,11 @@ public class DataBaseConnector {
             outputStream.flush();
             outputStream.close();
             int rp = connection.getResponseCode();
-            System.out.println(s);
-            if(rp==200||rp==204)
-               System.out.println(rp);
+
+            if(rp!=204)
+            {
+                System.out.println("ERROR: database replied with error code: " + rp);
+            }
     
         } catch (Exception e) {
             e.printStackTrace();
