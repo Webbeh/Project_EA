@@ -29,7 +29,8 @@ public class FieldConnector {
 
         //Schedule a polling of inputs
         Timer t = new Timer();
-        t.scheduleAtFixedRate(new FieldConnector.PollTask(), 0, 3000);
+        //Add delay to wait for objects to be connected.
+        t.scheduleAtFixedRate(new FieldConnector.PollTask(), 500, 3000);
     }
     
     public static FieldConnector getInstance(){

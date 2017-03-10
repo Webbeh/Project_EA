@@ -67,7 +67,6 @@ public class ModbusConnector {
             DEBUG_INFO("connect()", " ModbusInitException: " + e.getLocalizedMessage());
             _isInitialized = false;
         }
-        
         // If we arrive here, all is fine.
         return _isInitialized;
     }
@@ -135,7 +134,7 @@ public class ModbusConnector {
     }
    
     public boolean checkConnect() {
-        return _modbus.isConnected();
+        return _modbus.isConnected() && _modbus.testSlaveNode(1);
     }
     public void error() {
         _isInitialized=false;
