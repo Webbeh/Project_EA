@@ -48,7 +48,6 @@ public class FieldConnector {
      */
     public void onNewValue(DataPoint dp)
     {
-
         if (dp instanceof BinaryDataPoint)
         {
             pushToField(dp.getLabel(), ((BinaryDataPoint) dp).getValue());
@@ -97,10 +96,8 @@ public class FieldConnector {
                 }
     
                 for (Coil coil : coilsHashMap.values()) {
-                    coil.getDatapoint().setValue(!coil.getDatapoint().getValue());
                     coil.write();
                 }
-    
                 for (DiscreteInput di : discreteInputHashMap.values()) {
                     di.read();
                 }

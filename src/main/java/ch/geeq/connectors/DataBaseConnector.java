@@ -9,6 +9,7 @@ import java.io.DataOutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Base64;
+import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -20,7 +21,7 @@ import java.util.TimerTask;
 public class DataBaseConnector {
     
     //Settings
-    private final static String URL = "http://vlesdi.hevs.ch:8086/write?db=";
+    private final static String URL = "http://vlesdi.hevs.ch:8086/write?precision=ms&db=";
     private final static String db_name = "SIn16";
     private final static String username = "SIn16";
     private final static String password = Utility.md5sum(username);
@@ -71,7 +72,9 @@ public class DataBaseConnector {
      */
     private void pushToDB(String label, boolean value)
     {
-        s+=label+" value="+value  + " " + new java.util.Date().getTime() +"\n";
+        Calendar c = Calendar.getInstance();
+        long secs = c.getTimeInMillis();
+        s+=label+" value="+value  + " " + secs +"\n";
     }
     
     int i = 0;
@@ -84,19 +87,19 @@ public class DataBaseConnector {
      */
     private void pushToDB(String label, float value)
     {
-        s += label + " value=" + value + " " + new java.util.Date().getTime() + "\n";
+        Calendar c = Calendar.getInstance();
+        long secs = c.getTimeInMillis();
+        s+=label+" value="+value  + " " + secs +"\n";
     }
     
     String s = "";
     
     public void push()
     {
-
-        if(s.isEmpty())
-        {
+        if(s.isEmpty() && s.equals(("")))
             return;
-        }
-
+    
+    
         URL url;
         try {
             //Url scheme : http://username:password@url:port/write?db=dbname
