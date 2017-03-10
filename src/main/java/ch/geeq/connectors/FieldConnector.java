@@ -31,7 +31,7 @@ public class FieldConnector {
         Timer t = new Timer();
         //Add delay to wait for objects to be connected.
         t.scheduleAtFixedRate(new FieldConnector.PollTask(), 500, 3000);
-    }null
+    }
     
     public static FieldConnector getInstance(){
 
