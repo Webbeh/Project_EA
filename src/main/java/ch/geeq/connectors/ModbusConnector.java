@@ -84,7 +84,7 @@ public class ModbusConnector {
         return null;
     }
     
-    public boolean readBinary(int rtuAddress, int registerAddress) {
+    public Boolean readBinary(int rtuAddress, int registerAddress) {
         if (_isInitialized) {
             try {
                 return _modbus.getValue(BaseLocator.coilStatus(rtuAddress, registerAddress));
@@ -94,7 +94,7 @@ public class ModbusConnector {
                 DEBUG_INFO("writeBinary()", " ErrorResponseException: " + e.getLocalizedMessage());
             }
         }
-        return false;
+        return null;
     }
 
     public boolean writeBinary(int rtuAddress, int registerAddress, boolean value) {
@@ -117,5 +117,9 @@ public class ModbusConnector {
     // DEBUG System.out
     private void DEBUG_INFO(String method, String msg) {
         Utility.DEBUG( "[modbus::ModbusConnector]", method, msg);
+    }
+    
+    public void error() {
+        _isInitialized=false;
     }
 }

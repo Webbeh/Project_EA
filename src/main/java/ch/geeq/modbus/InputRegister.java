@@ -24,8 +24,14 @@ public class InputRegister {
 
     public void read() {
         ModbusConnector mc = ModbusConnector.getInstance();
-        float f = mc.readFloat(rtuAddress, inputRegisterAddress);
-        itsFloatDataPoint.setValue(f);
+        try {
+            float f = mc.readFloat(rtuAddress, inputRegisterAddress);
+            itsFloatDataPoint.setValue(f);
+        } catch (NullPointerException e)
+        {
+            mc.error();
+            System.out.println("The connection ended unexpectedly.");
+        }
     }
     
     public FloatDataPoint getDataPoint() {

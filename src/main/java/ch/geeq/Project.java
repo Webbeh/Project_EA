@@ -2,8 +2,6 @@ package ch.geeq;
 
 import ch.geeq.connectors.FieldConnector;
 
-import java.util.Timer;
-
 /**
  * @author weby@we-bb.com [Nicolas Glassey]
  * @version 1.0.0
@@ -37,11 +35,12 @@ public class Project {
         connector.addDiscreteInput("COAL_SW", 1, 209);
         connector.addDiscreteInput("BATT_SW", 1, 217);
         connector.addDiscreteInput("GRID_SW", 1, 225);
+        /*
         connector.addCoil("SOLAR_SW", 1, 201);
         connector.addCoil("COAL_SW", 1, 209);
         connector.addCoil("BATT_SW", 1, 217);
         connector.addCoil("GRID_SW", 1, 225);
-    
+    */
 
     }
 }
