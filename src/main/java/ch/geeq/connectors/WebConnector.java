@@ -8,6 +8,7 @@ import org.java_websocket.handshake.ClientHandshake;
 import org.java_websocket.server.WebSocketServer;
 
 import java.net.InetSocketAddress;
+import java.util.HashMap;
 
 /**
  * @author weby@we-bb.com [Nicolas Glassey]
@@ -16,7 +17,7 @@ import java.net.InetSocketAddress;
  */
 public class WebConnector extends WebSocketServer {
 
-
+    private final HashMap<WebSocket, ClientHandshake> sockets = new HashMap<>();
     private static WebConnector instance;
     
     public WebConnector(InetSocketAddress address) {
@@ -25,17 +26,23 @@ public class WebConnector extends WebSocketServer {
     
     @Override
     public void onOpen(WebSocket webSocket, ClientHandshake clientHandshake) {
-        System.out.println(webSocket.toString());
+        System.out.println("New websocket connected.");
+        webSocket.send("Welcome !");
+        sockets.put(webSocket, clientHandshake);
     }
     
     @Override
     public void onClose(WebSocket webSocket, int i, String s, boolean b) {
-    
+        System.out.println("Websocket disconnected.");
+        sockets.remove(webSocket);
     }
     
     @Override
     public void onMessage(WebSocket webSocket, String s) {
-    
+        System.out.println("----------------------");
+        System.out.println("Received from socket :");
+        System.out.println(s);
+        System.out.println("----------------------");
     }
     
     @Override
@@ -49,7 +56,6 @@ public class WebConnector extends WebSocketServer {
         {
                 InetSocketAddress add = new InetSocketAddress("localhost", 8888);
                 instance = new WebConnector(add);
-                System.out.println(instance.getPort());
                 instance.run();
         }
         return instance;
