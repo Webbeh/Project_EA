@@ -10,6 +10,7 @@ import com.serotonin.modbus4j.exception.ModbusInitException;
 import com.serotonin.modbus4j.exception.ModbusTransportException;
 import com.serotonin.modbus4j.ip.IpParameters;
 import com.serotonin.modbus4j.locator.BaseLocator;
+import com.serotonin.modbus4j.sero.messaging.WaitingRoomException;
 
 /**
  * Created by rut on 30/01/17.
@@ -60,6 +61,7 @@ public class ModbusConnector {
 
         // Connect to the slave.
         try {
+            _modbus.setTimeout(_modbus.getTimeout()*10);
             _modbus.init();
             _isInitialized = true;
             _modbus.setConnected(true);
@@ -67,6 +69,7 @@ public class ModbusConnector {
             DEBUG_INFO("connect()", " ModbusInitException: " + e.getLocalizedMessage());
             _isInitialized = false;
         }
+
         // If we arrive here, all is fine.
         return _isInitialized;
     }
@@ -122,6 +125,7 @@ public class ModbusConnector {
                 DEBUG_INFO("writeBinary()", " ErrorResponseException: " + e.getLocalizedMessage());
                 _modbus.setConnected(false);
             }
+
         }
         return false;
     }
@@ -134,6 +138,8 @@ public class ModbusConnector {
     }
    
     public boolean checkConnect() {
+
+
         return _modbus.isConnected() && _modbus.testSlaveNode(1);
     }
     public void error() {

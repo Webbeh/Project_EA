@@ -3,6 +3,7 @@ package ch.geeq.connectors;
 import ch.geeq.datapoint.BinaryDataPoint;
 import ch.geeq.datapoint.DataPoint;
 import ch.geeq.datapoint.FloatDataPoint;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.java_websocket.WebSocket;
 import org.java_websocket.handshake.ClientHandshake;
 import org.java_websocket.server.WebSocketServer;
@@ -43,6 +44,20 @@ public class WebConnector extends WebSocketServer {
         System.out.println("Received from socket :");
         System.out.println(s);
         System.out.println("----------------------");
+
+        if(s.contains("="))
+        {
+            String arg[] = s.split("=");
+
+            if ( arg[1].equalsIgnoreCase("true"))
+            {
+                onMessage(arg[0],true);
+            }
+            else if ( arg[1].equalsIgnoreCase("false"))
+            {
+                onMessage(arg[0],false);
+            }
+        }
     }
     
     @Override

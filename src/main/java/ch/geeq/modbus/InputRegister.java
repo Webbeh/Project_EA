@@ -3,7 +3,6 @@ package ch.geeq.modbus;
 import ch.geeq.connectors.ModbusConnector;
 import ch.geeq.datapoint.FloatDataPoint;
 
-
 /**
  * @author weby@we-bb.com [Nicolas Glassey]
  * @version 1.0.0
