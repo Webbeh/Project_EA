@@ -34,8 +34,8 @@ public abstract class DataPoint {
         this.isOutput = isOutput;
 
         dbc = DataBaseConnector.getInstance();
-        wc = WebConnector.getInstance();
         fc = FieldConnector.getInstance();
+        wc = WebConnector.getInstance();
 
         dataPointMap.put(label, this);
 

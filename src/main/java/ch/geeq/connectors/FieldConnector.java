@@ -94,7 +94,6 @@ public class FieldConnector {
                     inputRegister.read();
                 }
                 for (Coil coil : coilsHashMap.values()) {
-                    coil.getDatapoint().setValue(true);
                     coil.write();
                 }
                 for (DiscreteInput di : discreteInputHashMap.values()) {

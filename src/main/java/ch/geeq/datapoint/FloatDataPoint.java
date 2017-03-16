@@ -16,7 +16,6 @@ public class FloatDataPoint extends DataPoint {
 
     public void setValue(Float value) {
         this.value = value;
-
         push();
     }
     

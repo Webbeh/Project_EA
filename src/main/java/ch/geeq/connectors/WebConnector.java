@@ -3,7 +3,6 @@ package ch.geeq.connectors;
 import ch.geeq.datapoint.BinaryDataPoint;
 import ch.geeq.datapoint.DataPoint;
 import ch.geeq.datapoint.FloatDataPoint;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.java_websocket.WebSocket;
 import org.java_websocket.handshake.ClientHandshake;
 import org.java_websocket.server.WebSocketServer;
@@ -28,7 +27,7 @@ public class WebConnector extends WebSocketServer {
     @Override
     public void onOpen(WebSocket webSocket, ClientHandshake clientHandshake) {
         System.out.println("New websocket connected.");
-        webSocket.send("Welcome !");
+        webSocket.send("Welcome, you moron");
         sockets.put(webSocket, clientHandshake);
     }
     
@@ -69,7 +68,7 @@ public class WebConnector extends WebSocketServer {
 
         if(instance == null)
         {
-                InetSocketAddress add = new InetSocketAddress("localhost", 8888);
+                InetSocketAddress add = new InetSocketAddress("127.0.0.1", 8888);
                 instance = new WebConnector(add);
                 instance.run();
         }
@@ -105,13 +104,22 @@ public class WebConnector extends WebSocketServer {
         dp.setValue(value);
     }
 
-    public void pushToWebPages(String label, boolean value)
+    void pushToWebPages(String label, boolean value)
     {
+        sendAll(label+"="+value);
 //        System.out.println("Web:" +label + ":" + value);
     }
     
-    public void pushToWebPages(String label, float value)
+    void pushToWebPages(String label, float value)
     {
+        sendAll(label+"="+value);
 //        System.out.println("Web:" +label + ":" + value);
+    }
+    private void sendAll(String s)
+    {
+        for(WebSocket socket : sockets.keySet())
+        {
+            socket.send(s);
+        }
     }
 }
