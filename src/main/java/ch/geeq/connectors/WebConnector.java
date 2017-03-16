@@ -3,19 +3,43 @@ package ch.geeq.connectors;
 import ch.geeq.datapoint.BinaryDataPoint;
 import ch.geeq.datapoint.DataPoint;
 import ch.geeq.datapoint.FloatDataPoint;
+import org.java_websocket.WebSocket;
+import org.java_websocket.handshake.ClientHandshake;
+import org.java_websocket.server.WebSocketServer;
+
+import java.net.InetSocketAddress;
 
 /**
  * @author weby@we-bb.com [Nicolas Glassey]
  * @version 1.0.0
  * @since 2/24/17
  */
-public class WebConnector {
+public class WebConnector extends WebSocketServer {
 
 
     private static WebConnector instance;
-
-    private WebConnector()
-    {
+    
+    public WebConnector(InetSocketAddress address) {
+        super(address);
+    }
+    
+    @Override
+    public void onOpen(WebSocket webSocket, ClientHandshake clientHandshake) {
+        System.out.println(webSocket.toString());
+    }
+    
+    @Override
+    public void onClose(WebSocket webSocket, int i, String s, boolean b) {
+    
+    }
+    
+    @Override
+    public void onMessage(WebSocket webSocket, String s) {
+    
+    }
+    
+    @Override
+    public void onError(WebSocket webSocket, Exception e) {
     
     }
     
@@ -23,7 +47,10 @@ public class WebConnector {
 
         if(instance == null)
         {
-            instance = new WebConnector();
+                InetSocketAddress add = new InetSocketAddress("localhost", 8888);
+                instance = new WebConnector(add);
+                System.out.println(instance.getPort());
+                instance.run();
         }
         return instance;
     }

@@ -36,10 +36,15 @@
     </repositories>
 
     <dependencies>
-	<dependency>
-		<groupId>com.infiniteautomation</groupId>
- 		<artifactId>modbus4j</artifactId>
-        <version>3.0.0</version>
-    </dependency>
+	    <dependency>
+	    	<groupId>com.infiniteautomation</groupId>
+ 	    	<artifactId>modbus4j</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.java-websocket</groupId>
+            <artifactId>Java-WebSocket</artifactId>
+            <version>LATEST</version>
+        </dependency>
     </dependencies>
 </project>
