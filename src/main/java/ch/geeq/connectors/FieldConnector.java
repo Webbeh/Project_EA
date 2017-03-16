@@ -26,7 +26,6 @@ public class FieldConnector {
     private FieldConnector()
     {
         ModbusConnector.getInstance().connect("localhost", 1502);
-
         //Schedule a polling of inputs
         Timer t = new Timer();
         //Add delay to wait for objects to be connected.

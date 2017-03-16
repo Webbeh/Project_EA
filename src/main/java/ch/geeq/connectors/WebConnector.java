@@ -70,7 +70,7 @@ public class WebConnector extends WebSocketServer {
         {
                 InetSocketAddress add = new InetSocketAddress("127.0.0.1", 8888);
                 instance = new WebConnector(add);
-                instance.run();
+                instance.start();
         }
         return instance;
     }

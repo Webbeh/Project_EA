@@ -38,7 +38,7 @@ public abstract class DataPoint {
         wc = WebConnector.getInstance();
 
         dataPointMap.put(label, this);
-
+    
     }
 
     public String getLabel() {
