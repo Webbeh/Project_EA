@@ -20,14 +20,19 @@ public class ModbusConnector {
         return instance;
     }
     
-    public Float readFloat()
+    public boolean connect()
+    {
+        return false;
+    }
+    
+    public Float readFloat(int rtuAddress, int inputRegisterAddress)
     {
         return null;
     }
     
-    public Boolean readBinary()
+    public Boolean readBinary(int rtuAddress, int inputRegisterAddress)
     {
-    
+        return null;
     }
     
     public void writeFloat(float data)
@@ -35,7 +40,7 @@ public class ModbusConnector {
     
     }
     
-    public void writeBinary(boolean data)
+    public void writeBinary(int rtuAddress, int coilAddress, boolean data)
     {
     
     }
