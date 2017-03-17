@@ -1,6 +1,5 @@
 package ch.geeq.modbus;
 
-import ch.geeq.connectors.ModbusConnector;
 import ch.geeq.datapoint.FloatDataPoint;
 
 /**
