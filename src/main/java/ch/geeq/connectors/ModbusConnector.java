@@ -16,7 +16,6 @@ public class ModbusConnector extends Thread {
     private int port=0;
     private ModbusConnector()
     {
-    
     }
     
     public static ModbusConnector getInstance()
@@ -27,7 +26,11 @@ public class ModbusConnector extends Thread {
         }
         return instance;
     }
-  
+ 
+    Socket getSocket()
+    {
+        return socket;
+    }
     public boolean connect()
     {
         if(inet == null || port==0)
@@ -47,14 +50,16 @@ public class ModbusConnector extends Thread {
                 socket = new Socket(inet, port);
                 socket.setKeepAlive(false);
                 connected=true;
+                ModbusReader.getInstance(this).start();
                 return true;
             } catch (IOException e) {
                 return false;
             }
-        } else return true;
+        }
+        return true;
     }
    
-    private boolean checkConnect()
+    boolean checkConnect()
     {
         if(socket==null || !connected) return false;
         // TODO: 3/17/17 Check for modbus availability

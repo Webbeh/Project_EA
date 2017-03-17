@@ -99,6 +99,7 @@ public class FieldConnector {
                 }
             } catch(NullPointerException e)
             {
+                e.printStackTrace();
                 System.out.println("Connection ended unexpectedly.");
             }
         }

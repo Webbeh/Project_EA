@@ -60,7 +60,9 @@ public class DataBaseConnector {
         if (dp instanceof BinaryDataPoint) {
             pushToDB(dp.getLabel(), ((BinaryDataPoint) dp).getValue());
         } else if (dp instanceof FloatDataPoint) {
-            pushToDB(dp.getLabel(), ((FloatDataPoint) dp).getValue());
+            pushToDB(
+                    dp.getLabel(),
+                    ((FloatDataPoint) dp).getValue());
         }
     }
     
