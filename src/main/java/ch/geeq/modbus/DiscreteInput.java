@@ -1,6 +1,5 @@
 package ch.geeq.modbus;
 
-import ch.geeq.connectors.ModbusConnector;
 import ch.geeq.datapoint.BinaryDataPoint;
 
 /**
@@ -8,26 +7,23 @@ import ch.geeq.datapoint.BinaryDataPoint;
  * @version 1.0.0
  * @since 3/3/17
  */
-public class DiscreteInput {
-    private int inputRegisterAddress, rtuAddress;
-    private BinaryDataPoint itsBinaryDataPoint;
-    private String label;
-    
+public class DiscreteInput extends ModbusReg {
+
+
     public DiscreteInput(String label, int rtuAddress, int regAddress) {
-        this.rtuAddress=rtuAddress;
-        this.inputRegisterAddress=regAddress;
-        this.label=label;
+        super(label,rtuAddress,regAddress);
 
-        itsBinaryDataPoint = new BinaryDataPoint(label, false);
+        itsDataPoint = new BinaryDataPoint(label, false);
     }
 
-    public void read() {
-        ModbusConnector mc = ModbusConnector.getInstance();
-            Boolean f = mc.readBinary(rtuAddress, inputRegisterAddress);
-            itsBinaryDataPoint.setValue(f);
+    @Override
+    public void recieve() {
+
     }
-    
-    public BinaryDataPoint getDataPoint() {
-        return itsBinaryDataPoint;
+
+    @Override
+    public byte[] getPDU() {
+        return new byte[0];
     }
+
 }

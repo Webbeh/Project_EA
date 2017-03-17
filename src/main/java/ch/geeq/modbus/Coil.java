@@ -1,6 +1,5 @@
 package ch.geeq.modbus;
 
-import ch.geeq.connectors.ModbusConnector;
 import ch.geeq.datapoint.BinaryDataPoint;
 
 /**
@@ -8,10 +7,8 @@ import ch.geeq.datapoint.BinaryDataPoint;
  * @version 1.0.0
  * @since 3/2/17
  */
-public class Coil {
-    private int coilAddress, rtuAddress;
-    private BinaryDataPoint itsBinaryDataPoint;
-    private String label;
+public class Coil extends ModbusReg {
+
     
     /**
      * Creates a new coil
@@ -20,20 +17,26 @@ public class Coil {
      * @param coilAddress Register Address
      */
     public Coil(String label, int rtuAddress, int coilAddress) {
-        this.rtuAddress=rtuAddress;
-        this.coilAddress=coilAddress;
+        super(label,rtuAddress,coilAddress);
         
-        itsBinaryDataPoint = new BinaryDataPoint(label, true);
+        itsDataPoint = new BinaryDataPoint(label, true);
     }
-    
-    /**
-     * Write data to the coil
-     */
-    public void write() {
-        ModbusConnector.getInstance().writeBinary(rtuAddress,coilAddress,itsBinaryDataPoint.getValue());
+
+
+
+
+    @Override
+    public void recieve() {
+
     }
-    
-    public BinaryDataPoint getDatapoint() {
-        return itsBinaryDataPoint;
+
+    @Override
+    public byte[] getPDU() {
+        byte pdu[] = new byte[5];
+
+        pdu[0] = 5; //function code;
+
+
+        return pdu;
     }
 }

@@ -8,26 +8,23 @@ import ch.geeq.datapoint.FloatDataPoint;
  * @version 1.0.0
  * @since 3/2/17
  */
-public class InputRegister {
-    private int inputRegisterAddress, rtuAddress;
-    private FloatDataPoint itsFloatDataPoint;
-    private String label;
-    
+public class InputRegister extends ModbusReg{
+
     public InputRegister(String label, int rtuAddress, int regAddress) {
-        this.rtuAddress=rtuAddress;
-        this.inputRegisterAddress=regAddress;
-        this.label=label;
+        super(label, rtuAddress, regAddress);
 
-        itsFloatDataPoint = new FloatDataPoint(label, false);
+        itsDataPoint = new FloatDataPoint(label, false);
     }
 
-    public void read() throws NullPointerException {
-        ModbusConnector mc = ModbusConnector.getInstance();
-            Float f = mc.readFloat(rtuAddress, inputRegisterAddress);
-            itsFloatDataPoint.setValue(f);
+    @Override
+    public void recieve() {
+
     }
-    
-    public FloatDataPoint getDataPoint() {
-        return itsFloatDataPoint;
+
+    @Override
+    public byte[] getPDU() {
+        return new byte[0];
     }
+
+
 }

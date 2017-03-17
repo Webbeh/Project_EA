@@ -52,7 +52,7 @@ public class FieldConnector {
             pushToField(dp.getLabel(), ((BinaryDataPoint) dp).getValue());
             Coil coil = coilsHashMap.get(dp);
 
-            coil.write();
+            coil.send();
 
         }
         else if (dp instanceof FloatDataPoint)
@@ -89,13 +89,13 @@ public class FieldConnector {
         } else {
             try {
                 for (InputRegister inputRegister : inputRegisterHashMap.values()) {
-                    inputRegister.read();
+                    inputRegister.send();
                 }
                 for (Coil coil : coilsHashMap.values()) {
-                    coil.write();
+                    coil.send();
                 }
                 for (DiscreteInput di : discreteInputHashMap.values()) {
-                    di.read();
+                    di.send();
                 }
             } catch(NullPointerException e)
             {
@@ -114,7 +114,7 @@ public class FieldConnector {
     public void addInputRegister(String label ,int rtuAddress, int regAddress)
     {
         InputRegister ir = new InputRegister(label, rtuAddress, regAddress);
-        inputRegisterHashMap.put(ir.getDataPoint(), ir);
+        inputRegisterHashMap.put(ir.getDatapoint(), ir);
     }
     
     /**
@@ -129,7 +129,7 @@ public class FieldConnector {
         coilsHashMap.put(c.getDatapoint(), c);
     }
     
-    static int num = 1;
+
     
     /**
      * Registers a new discrete input to the fieldconnector.
@@ -139,7 +139,7 @@ public class FieldConnector {
      */
     public void addDiscreteInput(String label, int rtuAddress, int regAddress) {
         DiscreteInput d = new DiscreteInput(label, rtuAddress, regAddress);
-        discreteInputHashMap.put(d.getDataPoint(), d);
+        discreteInputHashMap.put(d.getDatapoint(), d);
     }
     
     /**
