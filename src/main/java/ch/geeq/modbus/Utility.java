@@ -67,6 +67,7 @@ public class Utility {
     }
 
 
+
     /**
      * Converts an unsigned byte to a signed integer.
      *
@@ -130,4 +131,14 @@ public class Utility {
         System.out.println(sdf.format(Calendar.getInstance().getTime()) + "." + String.format("%3d", millis) +
                             " " + className + " " + method + " > " + msg);
     }
+
+    /**
+     * add a for 2 byte number in the byte array at the position given
+     */
+    public static void addNumber(byte[] array, int start, int value)
+    {
+        array[start] = (byte) ( value>>8);
+        array[start+1] = (byte) ( value%8);
+    }
+
 }

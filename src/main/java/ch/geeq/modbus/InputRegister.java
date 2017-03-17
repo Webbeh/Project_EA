@@ -23,7 +23,18 @@ public class InputRegister extends ModbusReg{
 
     @Override
     public byte[] getPDU() {
-        return new byte[0];
+        byte pdu[] = new byte[5];
+
+        pdu[0] = 0x04; //function code to read the input register
+
+        //set the address of the register
+        Utility.addNumber(pdu,1,regAddress);
+
+        //set value the amount in the read. Only read one
+
+        Utility.addNumber(pdu,3,1);
+
+        return pdu;
     }
 
 

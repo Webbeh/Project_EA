@@ -36,6 +36,18 @@ public class Coil extends ModbusReg {
 
         pdu[0] = 5; //function code;
 
+        //set the address of the register
+        Utility.addNumber(pdu,1,regAddress);
+
+        //set value
+        if(((BinaryDataPoint)itsDataPoint).getValue()) //if on set the bobine
+        {
+            Utility.addNumber(pdu,3,0xFF00);
+        }
+        else
+        {
+            Utility.addNumber(pdu, 3, 0x0000);
+        }
 
         return pdu;
     }

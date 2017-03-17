@@ -32,4 +32,9 @@ public abstract class ModbusReg {
     public DataPoint getDatapoint() {
         return itsDataPoint;
     }
+
+    public int getRtuAddres()
+    {
+        return rtuAddress;
+    }
 }

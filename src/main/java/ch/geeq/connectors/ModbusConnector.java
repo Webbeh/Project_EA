@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.Socket;
 
 import ch.geeq.modbus.ModbusReg;
+import ch.geeq.modbus.Utility;
 
 import java.util.HashMap;
 
@@ -81,25 +82,7 @@ public class ModbusConnector extends Thread {
         }
     }
 
-    public Float readFloat(int rtuAddress, int inputRegisterAddress)
-    {
-        return null;
-    }
-    
-    public Boolean readBinary(int rtuAddress, int inputRegisterAddress)
-    {
-        return null;
-    }
-    
-    public void writeFloat(float data)
-    {
-    
-    }
-    
-    public void writeBinary(int rtuAddress, int coilAddress, boolean data)
-    {
-    
-    }
+
 
     //used to start a new transaction
     public void sendTransaction(ModbusReg t)
@@ -107,11 +90,29 @@ public class ModbusConnector extends Thread {
 
         //add the transaction to the list
         transactions.put(id, t);
-        id++;
+
 
 
         //TODO: compute MBAP header and get PDU
 
+        byte[] pdu = t.getPDU();
+        byte[] mbap = new byte[7]; //create an array for the MBAP
+
+        Utility.addNumber(mbap, 0, id);                  //set the id of the transaction
+        Utility.addNumber(mbap, 2, 0);              //use the modbus protocol so use 0
+        Utility.addNumber(mbap, 4, pdu.length+1);   //set the length to the lenght of the PDU +1 for the unit identifier
+        mbap[6]=(byte)t.getRtuAddres();                       //set the rtu address
+
+        try {
+            socket.getOutputStream().write(mbap);
+            socket.getOutputStream().write(pdu);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        //when sent increment the id from all
+        id++;
     }
 
     //get the transaction
