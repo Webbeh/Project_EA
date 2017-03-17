@@ -25,7 +25,7 @@ public class FieldConnector {
     
     private FieldConnector()
     {
-        ModbusConnector.getInstance().connect("localhost", 1502);
+        ModbusConnector.getInstance().connect("127.0.0.1", 1502);
         //Schedule a polling of inputs
         Timer t = new Timer();
         //Add delay to wait for objects to be connected.
@@ -84,9 +84,8 @@ public class FieldConnector {
     
     public void poll() {
         //Check modbus connexion
-        if (!ModbusConnector.getInstance().checkConnect()) {
+        if (!ModbusConnector.getInstance().connect()) {
             System.out.println("No modbus connection.");
-            ModbusConnector.getInstance().reconnect();
         } else {
             try {
                 for (InputRegister inputRegister : inputRegisterHashMap.values()) {
