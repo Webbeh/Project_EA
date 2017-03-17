@@ -7,4 +7,36 @@ package ch.geeq.connectors;
  */
 public class ModbusConnector {
     private static ModbusConnector instance;
+    
+    private ModbusConnector()
+    {
+    
+    }
+    
+    public static ModbusConnector getInstance()
+    {
+        if(instance==null)
+            instance=new ModbusConnector();
+        return instance;
+    }
+    
+    public Float readFloat()
+    {
+        return null;
+    }
+    
+    public Boolean readBinary()
+    {
+    
+    }
+    
+    public void writeFloat(float data)
+    {
+    
+    }
+    
+    public void writeBinary(boolean data)
+    {
+    
+    }
 }
