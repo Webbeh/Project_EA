@@ -16,7 +16,7 @@ import java.util.HashMap;
 public class ModbusConnector extends Thread {
     private static ModbusConnector instance;
 
-    private HashMap<Integer, ModbusReg> transactions;
+    private HashMap<Integer, ModbusReg> transactions = new HashMap<>();
     private int id = 0;
 
     private Socket socket;
@@ -60,7 +60,7 @@ public class ModbusConnector extends Thread {
                 socket = new Socket(inet, port);
                 socket.setKeepAlive(false);
                 connected=true;
-                ModbusReader.getInstance(this).start();
+               // ModbusReader.getInstance(this).start();
                 return true;
             } catch (IOException e) {
                 return false;
@@ -101,11 +101,15 @@ public class ModbusConnector extends Thread {
         Utility.addNumber(mbap, 0, id);                  //set the id of the transaction
         Utility.addNumber(mbap, 2, 0);              //use the modbus protocol so use 0
         Utility.addNumber(mbap, 4, pdu.length+1);   //set the length to the lenght of the PDU +1 for the unit identifier
-        mbap[6]=(byte)t.getRtuAddres();                       //set the rtu address
+        mbap[6]=(byte)t.getRtuAddress();                       //set the rtu address
+
+
+       // System.out.println("Sending transaction: " + id + " mbap: " + Utility.getHexString(mbap,0,mbap.length) + " pdu: " + Utility.getHexString(pdu,0,pdu.length));
 
         try {
             socket.getOutputStream().write(mbap);
             socket.getOutputStream().write(pdu);
+            socket.getOutputStream().flush();
         } catch (IOException e) {
             e.printStackTrace();
         }

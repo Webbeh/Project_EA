@@ -24,30 +24,27 @@ public class ModbusReader extends Thread {
         return instance;
     }
   
-    @Override
-    public void start()
-    {
-        super.start();
-    }
-   
+
+
     @Override
     public void run()
     {
         while(true) {
             System.out.println("Test");
-            if (!connector.checkConnect()) {
+       /*     if (!connector.checkConnect()) {
                 try {
                     Thread.sleep(100);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 continue;
-            }
+            }*/
             try {
                 DataInputStream dis = new DataInputStream(connector.getSocket().getInputStream());
                 String line = dis.readUTF();
                 System.out.println("Read : "+line);
-            } catch (IOException ignored) {
+            } catch (IOException e) {
+                e.printStackTrace();
             }
     
         }

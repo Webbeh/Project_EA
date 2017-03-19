@@ -138,7 +138,7 @@ public class Utility {
     public static void addNumber(byte[] array, int start, int value)
     {
         array[start] = (byte) ( value>>8);
-        array[start+1] = (byte) ( value%8);
+        array[start+1] = (byte) ( value% 256);
     }
 
 }

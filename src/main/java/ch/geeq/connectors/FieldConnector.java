@@ -18,6 +18,7 @@ import java.util.TimerTask;
  */
 public class FieldConnector {
 
+    public static final String ipAddress = "192.168.100.42";
     private static FieldConnector instance;
     final HashMap<DataPoint, InputRegister> inputRegisterHashMap = new HashMap<>();
     final HashMap<DataPoint, Coil> coilsHashMap = new HashMap<>();
@@ -25,7 +26,7 @@ public class FieldConnector {
     
     private FieldConnector()
     {
-        ModbusConnector.getInstance().connect("127.0.0.1", 1502);
+        ModbusConnector.getInstance().connect(ipAddress, 502);
         //Schedule a polling of inputs
         Timer t = new Timer();
         //Add delay to wait for objects to be connected.
