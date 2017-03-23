@@ -16,7 +16,7 @@ public class Project {
 
 //        connector.addDiscreteInput("COAL_SW", 1, 209);
 //        connector.addCoil("COAL_SW", 1, 209);
-        fieldConnector.addInputRegister("SOLAR_STRING0_I_FLOAT", 1, 1);
+     /*   fieldConnector.addInputRegister("SOLAR_STRING0_I_FLOAT", 1, 1);
         fieldConnector.addInputRegister("SOLAR_STRING1_I_FLOAT", 1, 9);
         fieldConnector.addInputRegister("SOLAR_STRING2_I_FLOAT", 1, 17);
         fieldConnector.addInputRegister("SOLAR_STRING3_I_FLOAT", 1, 25);
@@ -38,7 +38,7 @@ public class Project {
 
         fieldConnector.addCoil("SOLAR_SW", 1, 201);
         fieldConnector.addCoil("COAL_SW", 1, 209);
-        fieldConnector.addCoil("BATT_SW", 1, 217);
+        fieldConnector.addCoil("BATT_SW", 1, 217);*/
         fieldConnector.addCoil("GRID_SW", 1, 225);
 
     }

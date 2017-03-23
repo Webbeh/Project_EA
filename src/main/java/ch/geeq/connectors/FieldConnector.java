@@ -50,7 +50,6 @@ public class FieldConnector {
     {
         if (dp instanceof BinaryDataPoint)
         {
-            pushToField(dp.getLabel(), ((BinaryDataPoint) dp).getValue());
             Coil coil = coilsHashMap.get(dp);
 
             coil.request();
@@ -58,7 +57,7 @@ public class FieldConnector {
         }
         else if (dp instanceof FloatDataPoint)
         {
-            pushToField(dp.getLabel(), ((FloatDataPoint) dp).getValue());
+            //no output float done yet so no float are ever pushed to the field
         }
     }
     
@@ -93,7 +92,9 @@ public class FieldConnector {
                     inputRegister.request();
                 }
                 for (Coil coil : coilsHashMap.values()) {
-                    coil.request();
+                    //toggle the value each time
+                    ((BinaryDataPoint)coil.getDatapoint()).setValue(!((BinaryDataPoint)coil.getDatapoint()).getValue());
+                //    coil.send();
                 }
                 for (DiscreteInput di : discreteInputHashMap.values()) {
                     di.request();

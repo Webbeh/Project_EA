@@ -96,7 +96,7 @@ public class ModbusConnector extends Thread {
 
         byte[] pdu = t.getPDU();
         byte[] mbap = new byte[7]; //create an array for the MBAP
-    
+
         Utility.addNumber(mbap, 0, id);                  //set the id of the transaction
         Utility.addNumber(mbap, 2, 0);              //use the modbus protocol so use 0
         Utility.addNumber(mbap, 4, pdu.length+1);   //set the length to the lenght of the PDU +1 for the unit identifier
@@ -106,9 +106,9 @@ public class ModbusConnector extends Thread {
 //        pdu = Utility.reverse(pdu);
         System.out.println("mbap : "+mbap[6]+" "+mbap[5]+" "+mbap[4]+" "+mbap[3]+" "+mbap[2]+" "+mbap[1]+" "+mbap[0]);
         System.out.println("pdu : "+pdu[4]+" "+pdu[3]+" "+pdu[2]+" "+pdu[1]+" "+pdu[0]);
-        
+
        // System.out.println("Sending transaction: " + id + " mbap: " + Utility.getHexString(mbap,0,mbap.length) + " pdu: " + Utility.getHexString(pdu,0,pdu.length));
-        
+
         try {
             socket.getOutputStream().write(Utility.concatBytes(mbap,pdu));
             socket.getOutputStream().flush();
