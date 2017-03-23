@@ -18,7 +18,7 @@ public class Utility {
     /**
      * Calculates and returns the CRC using the data passed in parameters.
      *
-     * @param data a byte array containing the data to send
+     * @param data a byte array containing the data to request
      * @param offset the offset
      * @param len the data length
      * @return byte[] the CRC
@@ -51,7 +51,7 @@ public class Utility {
     /**
      * Checks the CRC and returns true if it is correct, otherwise false.
      *
-     * @param data a byte array containing the data to send
+     * @param data a byte array containing the data to request
      * @param offset the offset
      * @param len the data length
      * @param crc a byte array containing the CRC to check
@@ -140,5 +140,14 @@ public class Utility {
         array[start] = (byte) ( value>>8);
         array[start+1] = (byte) ( value% 256);
     }
-
+    
+    public static byte[] reverse(byte[] array)
+    {
+        byte[] ret = new byte[array.length];
+        for(int i = 0; i < array.length; i++)
+        {
+            ret[i] = array[array.length-i-1];
+        }
+        return ret;
+    }
 }

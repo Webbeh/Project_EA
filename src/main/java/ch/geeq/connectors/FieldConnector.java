@@ -17,8 +17,8 @@ import java.util.TimerTask;
  * @since 2/24/17
  */
 public class FieldConnector {
-
-    public static final String ipAddress = "192.168.100.42";
+    public static final String ipAddress = "127.0.0.1";
+    public static final int port = 1502;
     private static FieldConnector instance;
     final HashMap<DataPoint, InputRegister> inputRegisterHashMap = new HashMap<>();
     final HashMap<DataPoint, Coil> coilsHashMap = new HashMap<>();
@@ -26,7 +26,7 @@ public class FieldConnector {
     
     private FieldConnector()
     {
-        ModbusConnector.getInstance().connect(ipAddress, 502);
+        ModbusConnector.getInstance().connect(ipAddress, port);
         //Schedule a polling of inputs
         Timer t = new Timer();
         //Add delay to wait for objects to be connected.
@@ -53,7 +53,7 @@ public class FieldConnector {
             pushToField(dp.getLabel(), ((BinaryDataPoint) dp).getValue());
             Coil coil = coilsHashMap.get(dp);
 
-            coil.send();
+            coil.request();
 
         }
         else if (dp instanceof FloatDataPoint)
@@ -90,13 +90,13 @@ public class FieldConnector {
         } else {
             try {
                 for (InputRegister inputRegister : inputRegisterHashMap.values()) {
-                    inputRegister.send();
+                    inputRegister.request();
                 }
                 for (Coil coil : coilsHashMap.values()) {
-                    coil.send();
+                    coil.request();
                 }
                 for (DiscreteInput di : discreteInputHashMap.values()) {
-                    di.send();
+                    di.request();
                 }
             } catch(NullPointerException e)
             {

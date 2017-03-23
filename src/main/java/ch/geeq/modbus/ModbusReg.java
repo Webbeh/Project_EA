@@ -1,7 +1,6 @@
 package ch.geeq.modbus;
 
 import ch.geeq.connectors.ModbusConnector;
-import ch.geeq.datapoint.BinaryDataPoint;
 import ch.geeq.datapoint.DataPoint;
 
 /**
@@ -20,7 +19,7 @@ public abstract class ModbusReg {
         this.label = label;
     }
 
-    public void send()
+    public void request()
     {
         ModbusConnector.getInstance().sendTransaction(this);
     }
