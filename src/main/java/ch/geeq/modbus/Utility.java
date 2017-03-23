@@ -150,4 +150,13 @@ public class Utility {
         }
         return ret;
     }
+    
+    public static byte[] concatBytes(byte[] mbap, byte[] pdu) {
+        byte[] b = new byte[mbap.length+pdu.length];
+        for(int i=0;i<mbap.length;i++)
+            b[i]=mbap[i];
+        for(int i=mbap.length;i<pdu.length+mbap.length;i++)
+            b[i]=pdu[i-mbap.length];
+        return b;
+    }
 }

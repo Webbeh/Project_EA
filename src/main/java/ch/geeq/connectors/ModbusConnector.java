@@ -3,7 +3,6 @@ package ch.geeq.connectors;
 import ch.geeq.modbus.ModbusReg;
 import ch.geeq.modbus.Utility;
 
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.HashMap;
@@ -107,13 +106,12 @@ public class ModbusConnector extends Thread {
 //        pdu = Utility.reverse(pdu);
         System.out.println("mbap : "+mbap[6]+" "+mbap[5]+" "+mbap[4]+" "+mbap[3]+" "+mbap[2]+" "+mbap[1]+" "+mbap[0]);
         System.out.println("pdu : "+pdu[4]+" "+pdu[3]+" "+pdu[2]+" "+pdu[1]+" "+pdu[0]);
+        
        // System.out.println("Sending transaction: " + id + " mbap: " + Utility.getHexString(mbap,0,mbap.length) + " pdu: " + Utility.getHexString(pdu,0,pdu.length));
         
         try {
-            DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
-            dos.write(mbap);
-            dos.write(pdu);
-            dos.flush();
+            socket.getOutputStream().write(Utility.concatBytes(mbap,pdu));
+            socket.getOutputStream().flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
